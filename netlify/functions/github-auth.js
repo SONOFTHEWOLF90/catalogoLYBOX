@@ -4,7 +4,7 @@ exports.handler = async () => {
 
     const auth = createAppAuth({
       appId: process.env.GITHUB_APP_ID,
-      privateKey: process.env.GITHUB_PRIVATE_KEY
+      privateKey: process.env.GITHUB_PRIVATE_KEY.replace(/\\n/g, "\n")
     });
 
     const appAuthentication = await auth({ type: "app" });
