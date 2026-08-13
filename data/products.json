@@ -5,10 +5,10 @@
     "name": "Guantes de Boxeo Pro",
     "brand": "MARCA DEMO",
     "category": "guantes",
-    "price": 149,
+    "price": 150,
     "currency": "PEN",
     "stock": "available",
-    "image": "images/products/guantes-de-boxeo-pro.png",
+    "image": "images/products/product-placeholder.svg",
     "description": "Producto DEMO para probar la tarjeta y el detalle del catálogo.",
     "features": [
       "Material DEMO",
