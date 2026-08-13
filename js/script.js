@@ -4,17 +4,18 @@
  */let products = [];
 
 async function loadProducts() {
-  const response = await fetch("content/products.json");
-  const data = await response.json();
+  try {
+    const response = await fetch("data/products.json");
+    products = await response.json();
 
-  products = data.items ?? data;
-
-  renderCategories();
-  renderFooterCategories();
-  renderFilters();
-  renderProducts();
+    renderCategories();
+    renderFooterCategories();
+    renderFilters();
+    renderProducts();
+  } catch (error) {
+    console.error("Error cargando productos:", error);
+  }
 }
-
 
 const WHATSAPP_NUMBER = "51986437411";
 
@@ -354,8 +355,8 @@ function init() {
   document.querySelector("#current-year").textContent = new Date().getFullYear();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadProducts();
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadProducts();
   initEvents();
   updateGeneralWhatsAppLinks();
 });

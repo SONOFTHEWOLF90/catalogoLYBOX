@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "sku": "DEMO-GB-001",
+    "name": "Guantes de Boxeo Pro",
+    "brand": "MARCA DEMO",
+    "category": "guantes",
+    "price": 149,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/product-placeholder.svg",
+    "description": "Producto DEMO para probar la tarjeta y el detalle del catálogo.",
+    "features": [
+      "Material DEMO",
+      "Cierre de velcro",
+      "Acolchado de alta densidad"
+    ],
+    "sizes": [
+      "10 oz",
+      "12 oz",
+      "14 oz",
+      "16 oz"
+    ],
+    "colors": [
+      "Negro",
+      "Rojo"
+    ]
+  },
+  {
+    "id": 2,
+    "sku": "DEMO-GB-002",
+    "name": "Guantes Training",
+    "brand": "MARCA DEMO",
+    "category": "guantes",
+    "price": 119,
+    "currency": "PEN",
+    "stock": "low",
+    "image": "images/products/product-placeholder.svg",
+    "description": "Producto DEMO para probar el estado de poco stock.",
+    "features": [
+      "Diseño para entrenamiento",
+      "Muñequera ajustable",
+      "Acolchado DEMO"
+    ],
+    "sizes": [
+      "10 oz",
+      "12 oz",
+      "14 oz",
+      "16 oz"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": 3,
+    "sku": "DEMO-VE-001",
+    "name": "Vendas Elásticas 4.5 m",
+    "brand": "MARCA DEMO",
+    "category": "vendas",
+    "price": 29,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/product-placeholder.svg",
+    "description": "Producto DEMO para probar la categoría de vendas.",
+    "features": [
+      "Longitud DEMO 4.5 m",
+      "Material elástico",
+      "Cierre seguro"
+    ],
+    "sizes": [
+      "Única"
+    ],
+    "colors": [
+      "Negro",
+      "Rojo",
+      "Blanco"
+    ]
+  },
+  {
+    "id": 4,
+    "sku": "DEMO-CA-001",
+    "name": "Casco de Boxeo Training",
+    "brand": "MARCA DEMO",
+    "category": "cascos",
+    "price": 99,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/product-placeholder.svg",
+    "description": "Producto DEMO para probar el detalle de protección.",
+    "features": [
+      "Protección facial DEMO",
+      "Ajuste posterior",
+      "Interior acolchado"
+    ],
+    "sizes": [
+      "M",
+      "L"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": 5,
+    "sku": "DEMO-PR-001",
+    "name": "Protector Bucal",
+    "brand": "MARCA DEMO",
+    "category": "protectores",
+    "price": 39,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/product-placeholder.svg",
+    "description": "Producto DEMO para probar la categoría de protectores.",
+    "features": [
+      "Diseño DEMO",
+      "Material termomoldeable",
+      "Estuche incluido DEMO"
+    ],
+    "sizes": [
+      "Única"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": 6,
+    "sku": "DEMO-SA-001",
+    "name": "Saco de Boxeo 120 cm",
+    "brand": "MARCA DEMO",
+    "category": "sacos",
+    "price": 349,
+    "currency": "PEN",
+    "stock": "low",
+    "image": "images/products/product-placeholder.svg",
+    "description": "Producto DEMO para probar productos de mayor precio.",
+    "features": [
+      "Altura DEMO 120 cm",
+      "Relleno DEMO",
+      "Sistema de suspensión DEMO"
+    ],
+    "sizes": [
+      "120 cm"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": 7,
+    "sku": "DEMO-RO-001",
+    "name": "Polo Training Combat",
+    "brand": "MARCA DEMO",
+    "category": "ropa",
+    "price": 69,
+    "currency": "PEN",
+    "stock": "soldout",
+    "image": "images/products/product-placeholder.svg",
+    "description": "Producto DEMO agotado para probar el estado de stock.",
+    "features": [
+      "Tela DEMO",
+      "Corte deportivo",
+      "Secado rápido DEMO"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": 8,
+    "sku": "DEMO-MMA-001",
+    "name": "Guantes MMA Training",
+    "brand": "MARCA DEMO",
+    "category": "mma",
+    "price": 109,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/product-placeholder.svg",
+    "description": "Producto DEMO para probar la categoría MMA.",
+    "features": [
+      "Acolchado DEMO",
+      "Cierre de velcro",
+      "Diseño para entrenamiento"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  }
+]
