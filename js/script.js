@@ -1,7 +1,21 @@
 /*
  * CATÁLOGO - JavaScript Vanilla
  * Cambia únicamente WHATSAPP_NUMBER para configurar el contacto.
- */
+ */let products = [];
+
+async function loadProducts() {
+  const response = await fetch("content/products.json");
+  const data = await response.json();
+
+  products = data.items ?? data;
+
+  renderCategories();
+  renderFooterCategories();
+  renderFilters();
+  renderProducts();
+}
+
+
 const WHATSAPP_NUMBER = "51986437411";
 
 const CATEGORY_META = {
@@ -340,4 +354,8 @@ function init() {
   document.querySelector("#current-year").textContent = new Date().getFullYear();
 }
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => {
+  loadProducts();
+  initEvents();
+  updateGeneralWhatsAppLinks();
+});
