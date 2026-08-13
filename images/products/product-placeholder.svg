@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <rect width="800" height="800" fill="#e8e8e8"/>
+  <path d="M0 620 260 360l145 145 100-120L800 700v100H0Z" fill="#cfcfcf"/>
+  <circle cx="570" cy="245" r="70" fill="#c8c8c8"/>
+  <text x="400" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#555">IMAGEN DEMO</text>
+  <text x="400" y="435" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#666">Reemplazar por fotografía real</text>
+</svg>
