@@ -325,4 +325,88 @@ function fileToBase64(file){
 
 }
 
+document
+  .getElementById("publicarGitHub")
+  .addEventListener("click", publicarCatalogo);
+
+async function publicarCatalogo() {
+
+  try {
+
+    // Subir imágenes nuevas
+    for (const [nombre, archivo] of Object.entries(imagenesLocales)) {
+
+      const base64 = await archivoABase64(archivo);
+
+      await subirGitHub(
+        `images/products/${nombre}`,
+        base64,
+        `Agregar imagen ${nombre}`
+      );
+
+    }
+
+    // Subir products.json
+    const json = btoa(
+      unescape(
+        encodeURIComponent(JSON.stringify(products, null, 2))
+      )
+    );
+
+    await subirGitHub(
+      "data/products.json",
+      json,
+      "Actualizar catálogo LYBOX"
+    );
+
+    alert("✅ Catálogo publicado correctamente.");
+
+  } catch (error) {
+
+    console.error(error);
+    alert("Error al publicar.");
+
+  }
+
+}
+
+async function subirGitHub(path, content, message) {
+
+  const r = await fetch("/.netlify/functions/github-upload", {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+      path,
+      content,
+      message
+    })
+
+  });
+
+  const json = await r.json();
+
+  if (!json.ok) throw new Error(json.error);
+
+}
+
+function archivoABase64(file) {
+
+  return new Promise(resolve => {
+
+    const reader = new FileReader();
+
+    reader.onload = () =>
+      resolve(reader.result.split(",")[1]);
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
 cargarProductos();

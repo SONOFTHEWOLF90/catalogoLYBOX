@@ -15,28 +15,29 @@ export default async (request) => {
 
     const { path, content, message } = await request.json();
 
-    const privateKey = process.env.GITHUB_PRIVATE_KEY
-      .replace(/\\n/g, "\n")
-      .replace(/\r/g, "")
-      .trim();
+    const privateKey = Buffer.from(
+      process.env.GITHUB_PRIVATE_KEY_BASE64,
+      "base64"
+    ).toString("utf8");
 
     const auth = createAppAuth({
       appId: Number(process.env.GITHUB_APP_ID),
       privateKey
     });
 
-    const installationAuthentication = await auth({
+    const installation = await auth({
       type: "installation",
       installationId: Number(process.env.GITHUB_INSTALLATION_ID)
     });
 
     const octokit = new Octokit({
-      auth: installationAuthentication.token
+      auth: installation.token
     });
 
     let sha = null;
 
     try {
+
       const actual = await octokit.request(
         "GET /repos/{owner}/{repo}/contents/{path}",
         {
@@ -47,6 +48,7 @@ export default async (request) => {
       );
 
       sha = actual.data.sha;
+
     } catch {}
 
     await octokit.request(
@@ -65,7 +67,6 @@ export default async (request) => {
     return new Response(
       JSON.stringify({ ok: true }),
       {
-        status: 200,
         headers: {
           "content-type": "application/json"
         }
