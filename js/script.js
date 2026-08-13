@@ -53,6 +53,9 @@ const elements = {
   mainNav: document.querySelector("#main-nav")
 };
 
+let currentGallery = [];
+let currentImageIndex = 0;
+
 function formatPrice(price, currency = "PEN") {
   return new Intl.NumberFormat("es-PE", {
     style: "currency",
@@ -240,51 +243,43 @@ function openProductModal(productId) {
   if (!product) return;
 
   const stock = getStockInfo(product.stock);
-  const whatsappDisabled = product.stock === "soldout";
 
-  elements.modalContent.innerHTML = `
-    <div class="modal-image">
-      <img src="${product.image}" alt="${product.name}">
-    </div>
-    <div class="modal-details">
-      <span class="eyebrow">${getCategoryLabel(product.category)}</span>
-      <span class="product-brand">${product.brand}</span>
-      <h2 id="modal-product-name">${product.name}</h2>
-      <p class="product-sku">SKU: ${product.sku}</p>
-      <div class="modal-price">${formatPrice(product.price, product.currency)}</div>
-      <span class="stock-status ${stock.className}">
-        <span class="stock-dot" aria-hidden="true"></span>${stock.label}
-      </span>
-      <p class="modal-description">${product.description}</p>
+  currentGallery = (product.images && product.images.length) ? product.images : [product.image];
+  currentImageIndex = 0;
 
-      <div class="detail-block">
-        <h3>Características</h3>
-        <ul>${product.features.map((feature) => `<li>${feature}</li>`).join("")}</ul>
-      </div>
+  document.getElementById("modal-brand").textContent = product.brand;
+  document.getElementById("modal-product-name").textContent = product.name;
+  document.getElementById("modal-price").textContent = formatPrice(product.price, product.currency);
+  const stockEl = document.getElementById("modal-stock");
+  stockEl.textContent = stock.label;
+  stockEl.className = `modal-stock ${stock.className}`;
+  document.getElementById("modal-description").textContent = product.description;
+  document.getElementById("modal-whatsapp").href = generateWhatsAppLink(product);
 
-      <div class="detail-columns">
-        <div>
-          <h3>Tallas</h3>
-          <p>${product.sizes.join(" · ")}</p>
-        </div>
-        <div>
-          <h3>Colores</h3>
-          <p>${product.colors.join(" · ")}</p>
-        </div>
-      </div>
+  crearChips("modal-features", product.features || [], "Características");
+  crearChips("modal-sizes", product.sizes || [], "Tallas");
+  crearChips("modal-colors", product.colors || [], "Colores");
 
-      <a class="btn btn-whatsapp btn-large ${whatsappDisabled ? "is-disabled" : ""}"
-         href="${whatsappDisabled ? "#" : generateWhatsAppLink(product)}"
-         ${whatsappDisabled ? 'aria-disabled="true"' : 'target="_blank" rel="noopener"'}>
-        ${whatsappDisabled ? "Producto agotado" : "Consultar por WhatsApp"}
-      </a>
-    </div>
-  `;
+  renderGallery();
 
   elements.modal.classList.add("is-open");
   elements.modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
-  elements.modal.querySelector(".modal-close").focus();
+}
+
+
+function crearChips(id, lista, titulo){
+  const cont = document.getElementById(id);
+  if(!lista.length){ cont.innerHTML=""; return; }
+  cont.innerHTML = `<h4>${titulo}</h4><div class="modal-list">${lista.map(i=>`<span class="modal-chip">${i}</span>`).join("")}</div>`;
+}
+
+function renderGallery(){
+  const main=document.getElementById("modal-main-image");
+  const thumbs=document.getElementById("modal-thumbnails");
+  main.src=currentGallery[currentImageIndex];
+  thumbs.innerHTML=currentGallery.map((img,i)=>`<div class="thumbnail ${i===currentImageIndex?"active":""}" data-thumb="${i}"><img src="${img}" alt=""></div>`).join("");
+  thumbs.querySelectorAll("[data-thumb]").forEach(btn=>btn.addEventListener("click",()=>{currentImageIndex=Number(btn.dataset.thumb);renderGallery();}));
 }
 
 function closeProductModal() {
@@ -337,7 +332,14 @@ function initEvents() {
     }
   });
 
-  elements.menuToggle.addEventListener("click", toggleMobileMenu);
+  document.getElementById("gallery-prev").addEventListener("click",()=>{currentImageIndex=(currentImageIndex-1+currentGallery.length)%currentGallery.length;renderGallery();});
+document.getElementById("gallery-next").addEventListener("click",()=>{currentImageIndex=(currentImageIndex+1)%currentGallery.length;renderGallery();});
+const main=document.getElementById("modal-main-image");
+let startX=0;
+main.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+main.addEventListener("touchend",e=>{const d=e.changedTouches[0].clientX-startX;if(Math.abs(d)<40)return;currentImageIndex=d>0?(currentImageIndex-1+currentGallery.length)%currentGallery.length:(currentImageIndex+1)%currentGallery.length;renderGallery();});
+
+elements.menuToggle.addEventListener("click", toggleMobileMenu);
 
   elements.mainNav.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", closeMobileMenu);

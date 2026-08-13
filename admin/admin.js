@@ -5,7 +5,7 @@ const tabla = document.getElementById("tablaProductos");
 const modal = document.getElementById("modal");
 const form = document.getElementById("formProducto");
 
-// Referencias de los inputs
+// Inputs
 const skuInput = document.getElementById("sku");
 const brandInput = document.getElementById("brand");
 const nameInput = document.getElementById("name");
@@ -26,7 +26,9 @@ const dropContent = document.getElementById("dropContent");
 
 let imagenSeleccionada = null;
 
-// ---------- Botones ----------
+// =========================================
+// BOTONES
+// =========================================
 
 document.getElementById("btnNuevo").onclick = () => {
   editando = -1;
@@ -35,6 +37,7 @@ document.getElementById("btnNuevo").onclick = () => {
 
   preview.classList.add("hidden");
   preview.removeAttribute("src");
+
   dropContent.classList.remove("hidden");
   imageName.textContent = "";
 
@@ -45,7 +48,9 @@ document.getElementById("cerrarModal").onclick = () => {
   modal.classList.add("hidden");
 };
 
-// ---------- Cargar productos ----------
+// =========================================
+// CARGAR PRODUCTOS
+// =========================================
 
 async function cargarProductos() {
   const response = await fetch("../data/products.json");
@@ -53,7 +58,9 @@ async function cargarProductos() {
   renderTabla();
 }
 
-// ---------- Tabla ----------
+// =========================================
+// TABLA
+// =========================================
 
 function estadoTexto(stock) {
   switch (stock) {
@@ -69,9 +76,11 @@ function estadoTexto(stock) {
 }
 
 function renderTabla() {
+
   tabla.innerHTML = "";
 
   products.forEach((product, index) => {
+
     tabla.innerHTML += `
       <tr>
         <td>${product.sku}</td>
@@ -85,10 +94,14 @@ function renderTabla() {
         </td>
       </tr>
     `;
+
   });
+
 }
 
-// ---------- Imagen ----------
+// =========================================
+// IMÁGENES
+// =========================================
 
 function slugify(texto) {
   return texto
@@ -99,51 +112,140 @@ function slugify(texto) {
     .replace(/^-|-$/g, "");
 }
 
-function procesarImagen(file) {
-  imagenSeleccionada = file;
+// Renombrar automáticamente cuando cambie el nombre
+nameInput.addEventListener("input", () => {
 
-  const extension = file.name.split(".").pop().toLowerCase();
-  const nombre = `${slugify(nameInput.value || "producto")}.${extension}`;
+  if (!imagenSeleccionada) return;
+
+  const nombre = `${slugify(nameInput.value || "producto")}.webp`;
 
   imageInput.value = `images/products/${nombre}`;
   imageName.textContent = `Se guardará como: ${nombre}`;
 
-  preview.src = URL.createObjectURL(file);
-  preview.classList.remove("hidden");
-  dropContent.classList.add("hidden");
+});
+
+// Convertir a WebP optimizado
+async function convertirAWebP(file) {
+
+  return new Promise((resolve) => {
+
+    const img = new Image();
+
+    img.onload = () => {
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const MAX = 1200;
+
+      let { width, height } = img;
+
+      if (width > height) {
+
+        if (width > MAX) {
+          height *= MAX / width;
+          width = MAX;
+        }
+
+      } else {
+
+        if (height > MAX) {
+          width *= MAX / height;
+          height = MAX;
+        }
+
+      }
+
+      canvas.width = Math.round(width);
+      canvas.height = Math.round(height);
+
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob(
+        blob => resolve(blob),
+        "image/webp",
+        0.82
+      );
+
+    };
+
+    img.src = URL.createObjectURL(file);
+
+  });
+
 }
 
+// Procesar imagen
+async function procesarImagen(file) {
+
+  const blobWebP = await convertirAWebP(file);
+
+  const nombre = `${slugify(nameInput.value || "producto")}.webp`;
+
+  imagenSeleccionada = new File(
+    [blobWebP],
+    nombre,
+    { type: "image/webp" }
+  );
+
+  imageInput.value = `images/products/${nombre}`;
+  imageName.textContent = `Se guardará como: ${nombre}`;
+
+  preview.src = URL.createObjectURL(imagenSeleccionada);
+  preview.classList.remove("hidden");
+  dropContent.classList.add("hidden");
+
+}
+
+// Drag & Drop
 dropZone.addEventListener("click", () => imageFile.click());
 
-imageFile.addEventListener("change", e => {
-  if (e.target.files[0]) procesarImagen(e.target.files[0]);
+imageFile.addEventListener("change", async e => {
+  if (e.target.files[0]) {
+    await procesarImagen(e.target.files[0]);
+  }
 });
 
-["dragenter", "dragover"].forEach(evento => {
-  dropZone.addEventListener(evento, e => {
+["dragenter","dragover"].forEach(evento => {
+
+  dropZone.addEventListener(evento,e=>{
+
     e.preventDefault();
     dropZone.classList.add("dragover");
+
   });
+
 });
 
-["dragleave", "drop"].forEach(evento => {
-  dropZone.addEventListener(evento, e => {
+["dragleave","drop"].forEach(evento => {
+
+  dropZone.addEventListener(evento,e=>{
+
     e.preventDefault();
     dropZone.classList.remove("dragover");
+
   });
+
 });
 
-dropZone.addEventListener("drop", e => {
+dropZone.addEventListener("drop", async e => {
+
   const file = e.dataTransfer.files[0];
-  if (file) procesarImagen(file);
+
+  if (file) await procesarImagen(file);
+
 });
 
-// ---------- Guardar producto ----------
+// =========================================
+// GUARDAR PRODUCTO
+// =========================================
 
 form.addEventListener("submit", e => {
+
   e.preventDefault();
 
   const nuevoProducto = {
+
     id: editando >= 0 ? products[editando].id : Date.now(),
     sku: skuInput.value,
     name: nameInput.value,
@@ -154,95 +256,107 @@ form.addEventListener("submit", e => {
     stock: stockInput.value,
     image: imageInput.value || "images/products/product-placeholder.svg",
     description: descriptionInput.value,
-    features: featuresInput.value
-      .split("\n")
-      .map(f => f.trim())
-      .filter(Boolean),
-    sizes: sizesInput.value
-      .split(",")
-      .map(s => s.trim())
-      .filter(Boolean),
-    colors: colorsInput.value
-      .split(",")
-      .map(c => c.trim())
-      .filter(Boolean)
+    features: featuresInput.value.split("\n").map(f=>f.trim()).filter(Boolean),
+    sizes: sizesInput.value.split(",").map(s=>s.trim()).filter(Boolean),
+    colors: colorsInput.value.split(",").map(c=>c.trim()).filter(Boolean)
+
   };
 
-  if (editando >= 0) {
-    products[editando] = nuevoProducto;
-    editando = -1;
-  } else {
+  if(editando>=0){
+
+    products[editando]=nuevoProducto;
+    editando=-1;
+
+  }else{
+
     products.push(nuevoProducto);
+
   }
 
   renderTabla();
 
   modal.classList.add("hidden");
+
 });
 
-// ---------- Editar ----------
+// =========================================
+// EDITAR
+// =========================================
 
-window.editarProducto = function(index) {
-  editando = index;
-  const p = products[index];
+window.editarProducto=function(index){
 
-  skuInput.value = p.sku;
-  brandInput.value = p.brand;
-  nameInput.value = p.name;
-  categoryInput.value = p.category;
-  priceInput.value = p.price;
-  stockInput.value = p.stock;
-  imageInput.value = p.image;
-  descriptionInput.value = p.description;
-  sizesInput.value = (p.sizes || []).join(",");
-  colorsInput.value = (p.colors || []).join(",");
-  featuresInput.value = (p.features || []).join("\n");
+  editando=index;
 
-  imagenSeleccionada = null;
+  const p=products[index];
 
-  preview.src = p.image;
+  skuInput.value=p.sku;
+  brandInput.value=p.brand;
+  nameInput.value=p.name;
+  categoryInput.value=p.category;
+  priceInput.value=p.price;
+  stockInput.value=p.stock;
+  imageInput.value=p.image;
+  descriptionInput.value=p.description;
+  sizesInput.value=(p.sizes||[]).join(",");
+  colorsInput.value=(p.colors||[]).join(",");
+  featuresInput.value=(p.features||[]).join("\n");
+
+  imagenSeleccionada=null;
+
+  preview.src=p.image;
   preview.classList.remove("hidden");
+
   dropContent.classList.add("hidden");
-  imageName.textContent = p.image.split("/").pop();
+  imageName.textContent=p.image.split("/").pop();
 
   modal.classList.remove("hidden");
+
 };
 
-// ---------- Eliminar ----------
+// =========================================
+// ELIMINAR
+// =========================================
 
-window.eliminarProducto = function(index) {
-  if (confirm(`¿Eliminar "${products[index].name}"?`)) {
-    products.splice(index, 1);
+window.eliminarProducto=function(index){
+
+  if(confirm(`¿Eliminar "${products[index].name}"?`)){
+
+    products.splice(index,1);
     renderTabla();
+
   }
+
 };
 
-// ---------- Publicar catálogo ----------
+// =========================================
+// PUBLICAR CATÁLOGO
+// =========================================
 
 document
-  .getElementById("publicarGitHub")
-  .addEventListener("click", publicarCatalogo);
+.getElementById("publicarGitHub")
+.addEventListener("click",publicarCatalogo);
 
-async function publicarCatalogo() {
-  try {
+async function publicarCatalogo(){
 
-    // Subir imagen nueva si se seleccionó una
-    if (imagenSeleccionada) {
+  try{
 
-      const nombre = imageInput.value.split("/").pop();
-      const base64 = await archivoABase64(imagenSeleccionada);
+    if(imagenSeleccionada){
+
+      const nombre=imageInput.value.split("/").pop();
+
+      const base64=await archivoABase64(imagenSeleccionada);
 
       await subirGitHub(
         `images/products/${nombre}`,
         base64,
         `Agregar imagen ${nombre}`
       );
+
     }
 
-    // Subir products.json
-    const json = btoa(
+    const json=btoa(
       unescape(
-        encodeURIComponent(JSON.stringify(products, null, 2))
+        encodeURIComponent(JSON.stringify(products,null,2))
       )
     );
 
@@ -252,47 +366,63 @@ async function publicarCatalogo() {
       "Actualizar catálogo LYBOX"
     );
 
-    imagenSeleccionada = null;
+    imagenSeleccionada=null;
 
     alert("✅ Catálogo publicado correctamente.");
 
-  } catch (error) {
+  }catch(error){
 
     console.error(error);
-    alert("Error al publicar: " + error.message);
+    alert("Error al publicar: "+error.message);
 
   }
+
 }
 
-async function subirGitHub(path, content, message) {
+async function subirGitHub(path,content,message){
 
-  const r = await fetch("/.netlify/functions/github-upload", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
+  const r=await fetch("/.netlify/functions/github-upload",{
+
+    method:"POST",
+
+    headers:{
+      "Content-Type":"application/json"
     },
-    body: JSON.stringify({
+
+    body:JSON.stringify({
       path,
       content,
       message
     })
+
   });
 
-  const json = await r.json();
+  const json=await r.json();
 
-  if (!json.ok) {
+  if(!json.ok){
+
     throw new Error(json.error);
+
   }
+
 }
 
-function archivoABase64(file) {
-  return new Promise(resolve => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(",")[1]);
+function archivoABase64(file){
+
+  return new Promise(resolve=>{
+
+    const reader=new FileReader();
+
+    reader.onload=()=>resolve(reader.result.split(",")[1]);
+
     reader.readAsDataURL(file);
+
   });
+
 }
 
-// ---------- Iniciar ----------
+// =========================================
+// INICIAR
+// =========================================
 
 cargarProductos();
