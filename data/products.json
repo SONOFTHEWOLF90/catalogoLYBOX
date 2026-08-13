@@ -198,5 +198,26 @@
     "colors": [
       "Negro"
     ]
+  },
+  {
+    "id": 1786651225932,
+    "sku": "sku-vendas-rosada-000",
+    "name": "vendas largas rosadas ",
+    "brand": "Mias",
+    "category": "vendas",
+    "price": 10,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/producto.png",
+    "description": "vendeas de pruebas ",
+    "features": [
+      "largas"
+    ],
+    "sizes": [
+      "4.5m"
+    ],
+    "colors": [
+      "rosado"
+    ]
   }
 ]
