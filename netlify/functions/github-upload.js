@@ -19,8 +19,11 @@ exports.handler = async (event) => {
     const { path, content, message } = JSON.parse(event.body);
 
     const auth = createAppAuth({
-      appId: process.env.GITHUB_APP_ID,
-      privateKey: process.env.GITHUB_PRIVATE_KEY.replace(/\\n/g, "\n")
+        appId: Number(process.env.GITHUB_APP_ID),
+        privateKey: process.env.GITHUB_PRIVATE_KEY
+         .replace(/\\n/g, "\n")
+         .replace(/\r/g, "")
+            .trim()
     });
 
     const installationAuthentication = await auth({
