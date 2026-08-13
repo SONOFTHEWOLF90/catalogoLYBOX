@@ -26,7 +26,8 @@ export default async (request) => {
     });
 
     const installationAuthentication = await auth({
-      type: "installation"
+      type: "installation",
+      installationId: Number(process.env.GITHUB_INSTALLATION_ID)
     });
 
     const octokit = new Octokit({

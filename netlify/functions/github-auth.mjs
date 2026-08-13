@@ -1,35 +1,30 @@
 import { createAppAuth } from "@octokit/auth-app";
-import { createPrivateKey } from "node:crypto";
 
 export default async () => {
   try {
-    const privateKey = process.env.GITHUB_PRIVATE_KEY
-      .replace(/\\n/g, "\n")
-      .replace(/\r/g, "")
-      .trim();
-
-    createPrivateKey({
-      key: privateKey,
-      format: "pem"
-    });
+    const privateKey = Buffer.from(
+      process.env.GITHUB_PRIVATE_KEY_BASE64,
+      "base64"
+    ).toString("utf8");
 
     const auth = createAppAuth({
       appId: Number(process.env.GITHUB_APP_ID),
       privateKey
     });
 
-    const app = await auth({ type: "app" });
+    const installation = await auth({
+      type: "installation",
+      installationId: Number(process.env.GITHUB_INSTALLATION_ID)
+    });
 
     return new Response(
       JSON.stringify({
         ok: true,
-        expires_at: app.expiresAt
+        expires_at: installation.expiresAt
       }),
       {
         status: 200,
-        headers: {
-          "content-type": "application/json"
-        }
+        headers: { "content-type": "application/json" }
       }
     );
 
@@ -42,9 +37,7 @@ export default async () => {
       }),
       {
         status: 500,
-        headers: {
-          "content-type": "application/json"
-        }
+        headers: { "content-type": "application/json" }
       }
     );
 
