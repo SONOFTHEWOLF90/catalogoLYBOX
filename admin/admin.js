@@ -1,10 +1,6 @@
 let products = [];
 let editando = -1;
 
-const GITHUB_OWNER = "SONOFTHEWOLF90";
-const GITHUB_REPO = "catalogoLYBOX";
-const GITHUB_BRANCH = "main";
-
 const tabla = document.getElementById("tablaProductos");
 const modal = document.getElementById("modal");
 const form = document.getElementById("formProducto");
@@ -35,9 +31,13 @@ let imagenSeleccionada = null;
 document.getElementById("btnNuevo").onclick = () => {
   editando = -1;
   form.reset();
+  imagenSeleccionada = null;
+
   preview.classList.add("hidden");
+  preview.removeAttribute("src");
   dropContent.classList.remove("hidden");
   imageName.textContent = "";
+
   modal.classList.remove("hidden");
 };
 
@@ -102,7 +102,8 @@ function slugify(texto) {
 function procesarImagen(file) {
   imagenSeleccionada = file;
 
-  const nombre = slugify(nameInput.value || "producto") + ".webp";
+  const extension = file.name.split(".").pop().toLowerCase();
+  const nombre = `${slugify(nameInput.value || "producto")}.${extension}`;
 
   imageInput.value = `images/products/${nombre}`;
   imageName.textContent = `Se guardará como: ${nombre}`;
@@ -114,7 +115,7 @@ function procesarImagen(file) {
 
 dropZone.addEventListener("click", () => imageFile.click());
 
-imageFile.addEventListener("change", (e) => {
+imageFile.addEventListener("change", e => {
   if (e.target.files[0]) procesarImagen(e.target.files[0]);
 });
 
@@ -153,9 +154,18 @@ form.addEventListener("submit", e => {
     stock: stockInput.value,
     image: imageInput.value || "images/products/product-placeholder.svg",
     description: descriptionInput.value,
-    features: featuresInput.value.split("\n").map(f => f.trim()).filter(Boolean),
-    sizes: sizesInput.value.split(",").map(s => s.trim()).filter(Boolean),
-    colors: colorsInput.value.split(",").map(c => c.trim()).filter(Boolean)
+    features: featuresInput.value
+      .split("\n")
+      .map(f => f.trim())
+      .filter(Boolean),
+    sizes: sizesInput.value
+      .split(",")
+      .map(s => s.trim())
+      .filter(Boolean),
+    colors: colorsInput.value
+      .split(",")
+      .map(c => c.trim())
+      .filter(Boolean)
   };
 
   if (editando >= 0) {
@@ -167,16 +177,12 @@ form.addEventListener("submit", e => {
 
   renderTabla();
 
-  form.reset();
-  preview.classList.add("hidden");
-  dropContent.classList.remove("hidden");
-  imageName.textContent = "";
   modal.classList.add("hidden");
 });
 
 // ---------- Editar ----------
 
-function editarProducto(index) {
+window.editarProducto = function(index) {
   editando = index;
   const p = products[index];
 
@@ -188,9 +194,11 @@ function editarProducto(index) {
   stockInput.value = p.stock;
   imageInput.value = p.image;
   descriptionInput.value = p.description;
-  sizesInput.value = p.sizes.join(",");
-  colorsInput.value = p.colors.join(",");
-  featuresInput.value = p.features.join("\n");
+  sizesInput.value = (p.sizes || []).join(",");
+  colorsInput.value = (p.colors || []).join(",");
+  featuresInput.value = (p.features || []).join("\n");
+
+  imagenSeleccionada = null;
 
   preview.src = p.image;
   preview.classList.remove("hidden");
@@ -198,152 +206,37 @@ function editarProducto(index) {
   imageName.textContent = p.image.split("/").pop();
 
   modal.classList.remove("hidden");
-}
+};
 
 // ---------- Eliminar ----------
 
-function eliminarProducto(index) {
+window.eliminarProducto = function(index) {
   if (confirm(`¿Eliminar "${products[index].name}"?`)) {
     products.splice(index, 1);
     renderTabla();
   }
-}
+};
 
-// ---------- Descargar catálogo ----------
-
-document.getElementById("publicarGitHub").addEventListener("click", publicarGitHub);
-
-async function publicarGitHub(){
-
-  let token = localStorage.getItem("lybox_token");
-
-  if(!token){
-    token = prompt("Pega tu GitHub Personal Access Token (solo la primera vez):");
-    if(!token) return;
-    localStorage.setItem("lybox_token", token);
-  }
-
-  try{
-
-    // Subir imágenes nuevas
-    for(const [nombre,file] of Object.entries(imagenesLocales)){
-
-      const base64 = await fileToBase64(file);
-
-      await subirArchivoGitHub(
-        token,
-        `images/products/${nombre}`,
-        base64,
-        `Agregar imagen ${nombre}`
-      );
-
-    }
-
-    // Actualizar products.json
-    const contenido = btoa(
-      unescape(
-        encodeURIComponent(JSON.stringify(products,null,2))
-      )
-    );
-
-    await subirArchivoGitHub(
-      token,
-      "data/products.json",
-      contenido,
-      "Actualizar catálogo LYBOX"
-    );
-
-    alert("✅ Catálogo publicado correctamente.");
-
-  }catch(err){
-
-    console.error(err);
-    alert("Error al publicar.");
-
-  }
-
-}
-
-async function subirArchivoGitHub(token,ruta,contenido,mensaje){
-
-  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ruta}`;
-
-  let sha = null;
-
-  const actual = await fetch(url,{
-    headers:{
-      Authorization:`Bearer ${token}`,
-      Accept:"application/vnd.github+json"
-    }
-  });
-
-  if(actual.ok){
-    const json = await actual.json();
-    sha = json.sha;
-  }
-
-  const body = {
-    message:mensaje,
-    content:contenido,
-    branch:GITHUB_BRANCH
-  };
-
-  if(sha) body.sha = sha;
-
-  const respuesta = await fetch(url,{
-    method:"PUT",
-    headers:{
-      Authorization:`Bearer ${token}`,
-      Accept:"application/vnd.github+json"
-    },
-    body:JSON.stringify(body)
-  });
-
-  if(!respuesta.ok){
-    throw new Error(await respuesta.text());
-  }
-
-}
-
-function fileToBase64(file){
-
-  return new Promise((resolve,reject)=>{
-
-    const reader = new FileReader();
-
-    reader.onload = ()=>{
-
-      resolve(reader.result.split(",")[1]);
-
-    };
-
-    reader.onerror = reject;
-
-    reader.readAsDataURL(file);
-
-  });
-
-}
+// ---------- Publicar catálogo ----------
 
 document
   .getElementById("publicarGitHub")
   .addEventListener("click", publicarCatalogo);
 
 async function publicarCatalogo() {
-
   try {
 
-    // Subir imágenes nuevas
-    for (const [nombre, archivo] of Object.entries(imagenesLocales)) {
+    // Subir imagen nueva si se seleccionó una
+    if (imagenSeleccionada) {
 
-      const base64 = await archivoABase64(archivo);
+      const nombre = imageInput.value.split("/").pop();
+      const base64 = await archivoABase64(imagenSeleccionada);
 
       await subirGitHub(
         `images/products/${nombre}`,
         base64,
         `Agregar imagen ${nombre}`
       );
-
     }
 
     // Subir products.json
@@ -359,54 +252,47 @@ async function publicarCatalogo() {
       "Actualizar catálogo LYBOX"
     );
 
+    imagenSeleccionada = null;
+
     alert("✅ Catálogo publicado correctamente.");
 
   } catch (error) {
 
     console.error(error);
-    alert("Error al publicar.");
+    alert("Error al publicar: " + error.message);
 
   }
-
 }
 
 async function subirGitHub(path, content, message) {
 
   const r = await fetch("/.netlify/functions/github-upload", {
-
     method: "POST",
-
     headers: {
       "Content-Type": "application/json"
     },
-
     body: JSON.stringify({
       path,
       content,
       message
     })
-
   });
 
   const json = await r.json();
 
-  if (!json.ok) throw new Error(json.error);
-
+  if (!json.ok) {
+    throw new Error(json.error);
+  }
 }
 
 function archivoABase64(file) {
-
   return new Promise(resolve => {
-
     const reader = new FileReader();
-
-    reader.onload = () =>
-      resolve(reader.result.split(",")[1]);
-
+    reader.onload = () => resolve(reader.result.split(",")[1]);
     reader.readAsDataURL(file);
-
   });
-
 }
+
+// ---------- Iniciar ----------
 
 cargarProductos();
