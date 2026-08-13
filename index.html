@@ -11,6 +11,32 @@
   <meta name="theme-color" content="#0b0d10">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.init();
+
+    window.netlifyIdentity.on("init", user => {
+      if (!user && window.location.hash.includes("recovery_token")) {
+        // Abre automáticamente el formulario de cambiar contraseña
+        window.netlifyIdentity.open("recovery");
+      }
+
+      if (!user && window.location.hash.includes("invite_token")) {
+        // Abre automáticamente la invitación
+        window.netlifyIdentity.open();
+      }
+    });
+
+    window.netlifyIdentity.on("login", () => {
+      document.location.href = "/admin/";
+    });
+  }
+</script>
+
+
+
 <body>
   <header class="site-header" id="inicio">
     <div class="container header-inner">
@@ -146,6 +172,6 @@
   </footer>
 
   <script src="js/script.js"></script>
-  
+
 </body>
 </html>
