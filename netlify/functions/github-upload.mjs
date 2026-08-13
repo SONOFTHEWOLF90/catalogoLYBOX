@@ -1,29 +1,28 @@
+import { createAppAuth } from "@octokit/auth-app";
+import { Octokit } from "@octokit/core";
+
 const OWNER = "SONOFTHEWOLF90";
 const REPO = "catalogoLYBOX";
 const BRANCH = "main";
 
-exports.handler = async (event) => {
+export default async (request) => {
 
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: "Método no permitido"
-    };
+  if (request.method !== "POST") {
+    return new Response("Método no permitido", { status: 405 });
   }
 
   try {
 
-    const { createAppAuth } = await import("@octokit/auth-app");
-    const { Octokit } = await import("@octokit/core");
+    const { path, content, message } = await request.json();
 
-    const { path, content, message } = JSON.parse(event.body);
+    const privateKey = process.env.GITHUB_PRIVATE_KEY
+      .replace(/\\n/g, "\n")
+      .replace(/\r/g, "")
+      .trim();
 
     const auth = createAppAuth({
-        appId: Number(process.env.GITHUB_APP_ID),
-        privateKey: process.env.GITHUB_PRIVATE_KEY
-         .replace(/\\n/g, "\n")
-         .replace(/\r/g, "")
-            .trim()
+      appId: Number(process.env.GITHUB_APP_ID),
+      privateKey
     });
 
     const installationAuthentication = await auth({
@@ -37,7 +36,6 @@ exports.handler = async (event) => {
     let sha = null;
 
     try {
-
       const actual = await octokit.request(
         "GET /repos/{owner}/{repo}/contents/{path}",
         {
@@ -48,10 +46,7 @@ exports.handler = async (event) => {
       );
 
       sha = actual.data.sha;
-
-    } catch (e) {
-      // El archivo no existe todavía
-    }
+    } catch {}
 
     await octokit.request(
       "PUT /repos/{owner}/{repo}/contents/{path}",
@@ -66,20 +61,30 @@ exports.handler = async (event) => {
       }
     );
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ ok: true })
-    };
+    return new Response(
+      JSON.stringify({ ok: true }),
+      {
+        status: 200,
+        headers: {
+          "content-type": "application/json"
+        }
+      }
+    );
 
   } catch (error) {
 
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
+    return new Response(
+      JSON.stringify({
         ok: false,
         error: error.message
-      })
-    };
+      }),
+      {
+        status: 500,
+        headers: {
+          "content-type": "application/json"
+        }
+      }
+    );
 
   }
 
