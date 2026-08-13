@@ -1,20 +1,20 @@
-const { createAppAuth } = require("@octokit/auth-app");
-const { Octokit } = require("@octokit/core");
+const OWNER = "SONOFTHEWOLF90";
+const REPO = "catalogoLYBOX";
+const BRANCH = "main";
 
-const OWNER="SONOFTHEWOLF90";
-const REPO="catalogoLYBOX";
-const BRANCH="main";
+exports.handler = async (event) => {
 
-exports.handler = async(event)=>{
-
-  if(event.httpMethod!=="POST"){
-    return{
-      statusCode:405,
-      body:"Método no permitido"
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      body: "Método no permitido"
     };
   }
 
-  try{
+  try {
+
+    const { createAppAuth } = await import("@octokit/auth-app");
+    const { Octokit } = await import("@octokit/core");
 
     const { path, content, message } = JSON.parse(event.body);
 
@@ -24,55 +24,57 @@ exports.handler = async(event)=>{
     });
 
     const installationAuthentication = await auth({
-      type:"installation"
+      type: "installation"
     });
 
     const octokit = new Octokit({
       auth: installationAuthentication.token
     });
 
-    let sha=null;
+    let sha = null;
 
-    try{
+    try {
 
       const actual = await octokit.request(
         "GET /repos/{owner}/{repo}/contents/{path}",
         {
-          owner:OWNER,
-          repo:REPO,
+          owner: OWNER,
+          repo: REPO,
           path
         }
       );
 
-      sha=actual.data.sha;
+      sha = actual.data.sha;
 
-    }catch(e){}
+    } catch (e) {
+      // El archivo no existe todavía
+    }
 
     await octokit.request(
       "PUT /repos/{owner}/{repo}/contents/{path}",
       {
-        owner:OWNER,
-        repo:REPO,
+        owner: OWNER,
+        repo: REPO,
         path,
         message,
         content,
         sha,
-        branch:BRANCH
+        branch: BRANCH
       }
     );
 
-    return{
-      statusCode:200,
-      body:JSON.stringify({ok:true})
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ ok: true })
     };
 
-  }catch(error){
+  } catch (error) {
 
-    return{
-      statusCode:500,
-      body:JSON.stringify({
-        ok:false,
-        error:error.message
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        ok: false,
+        error: error.message
       })
     };
 
