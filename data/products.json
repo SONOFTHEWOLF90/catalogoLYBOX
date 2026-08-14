@@ -1,67 +1,66 @@
 [
   {
     "id": 1,
-    "sku": "DEMO-GB-001",
+    "sku": "GLOVE-BOX-001",
     "name": "Guantes de Boxeo Pro",
-    "brand": "MARCA DEMO",
+    "brand": "EVERLAST",
     "category": "guantes",
-    "price": 150,
+    "price": 200,
     "currency": "PEN",
     "stock": "available",
-    "image": "images/products/product-placeholder.svg",
+    "image": "images/products/gloves everlast black .png",
     "description": "Producto DEMO para probar la tarjeta y el detalle del catálogo.",
     "features": [
-      "Material DEMO",
+      "Material Cuero",
       "Cierre de velcro",
       "Acolchado de alta densidad"
     ],
-    "sizes": [
-      "10 oz",
-      "12 oz",
-      "14 oz",
-      "16 oz"
-    ],
-    "colors": [
-      "Negro",
-      "Rojo"
-    ]
-  },
-  {
-    "id": 2,
-    "sku": "DEMO-GB-002",
-    "name": "Guantes Training",
-    "brand": "MARCA DEMO",
-    "category": "guantes",
-    "price": 119,
-    "currency": "PEN",
-    "stock": "low",
-    "image": "images/products/product-placeholder.svg",
-    "description": "Producto DEMO para probar el estado de poco stock.",
-    "features": [
-      "Diseño para entrenamiento",
-      "Muñequera ajustable",
-      "Acolchado DEMO"
-    ],
-    "sizes": [
-      "10 oz",
-      "12 oz",
-      "14 oz",
-      "16 oz"
+    "sizes": [ 
+      "14 oz"
+      
     ],
     "colors": [
       "Negro"
     ]
   },
   {
+    "id": 2,
+    "sku": "GLOVE-MMA-002",
+    "name": "Guantes MMA",
+    "brand": "VENOM",
+    "category": "guantes",
+    "price": 150,
+    "currency": "PEN",
+    "stock": "low",
+    "image": "images/products/gloves venum sparrin mma orange.jpg",
+    "description": "Producto DEMO para probar el estado de poco stock.",
+    "features": [
+      "Diseño para entrenamiento",
+      "Muñequera ajustable",
+      "Acolchado DEMO"
+      
+    ],
+    "sizes": [
+      "10 oz",
+      "12 oz",
+      "14 oz",
+      "16 oz"
+      
+    ],
+    "colors": [
+      "Naranja"
+    ]
+  },
+  {
     "id": 3,
-    "sku": "DEMO-VE-001",
+    "sku": "VENDAS-EVER-001",
     "name": "Vendas Elásticas 4.5 m",
-    "brand": "MARCA DEMO",
+    "brand": "EVERLAST",
     "category": "vendas",
-    "price": 29,
+    "price": 49,
     "currency": "PEN",
     "stock": "available",
-    "image": "images/products/product-placeholder.svg",
+    "image": "images/products/Venda-everlast-negro.png",
     "description": "Producto DEMO para probar la categoría de vendas.",
     "features": [
       "Longitud DEMO 4.5 m",
@@ -72,28 +71,50 @@
       "Única"
     ],
     "colors": [
-      "Negro",
-      "Rojo",
-      "Blanco"
+      "Negro"
+      
     ]
   },
   {
     "id": 4,
-    "sku": "DEMO-CA-001",
-    "name": "Casco de Boxeo Training",
-    "brand": "MARCA DEMO",
-    "category": "cascos",
-    "price": 99,
+    "sku": "VENDAS-EVER-002",
+    "name": "Vendas Elásticas 4.5 m",
+    "brand": "EVERLAST",
+    "category": "vendas",
+    "price": 49,
     "currency": "PEN",
     "stock": "available",
-    "image": "images/products/product-placeholder.svg",
+    "image": "images/products/vendas everlast rojas .png",
     "description": "Producto DEMO para probar el detalle de protección.",
     "features": [
-      "Protección facial DEMO",
-      "Ajuste posterior",
-      "Interior acolchado"
+      "Longitud DEMO 4.5 m",
+      "Material elástico",
+      "Cierre seguro"
     ],
     "sizes": [
+      "Única"
+    ],
+    "colors": [
+      "Rojo"
+    ]
+  },
+  {
+    "id": 5,
+    "sku": "POLO-LYBOX-001",
+    "name": "POLO SPARRING",
+    "brand": "LYBOX",
+    "category": "polos",
+    "price": 50,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/polo lybox sparring.jpeg",
+    "description": "Producto DEMO para probar la categoría de protectores.",
+    "features": [
+      "Diseño DEMO",
+      "Algodon"
+    ],
+    "sizes": [
+      "S",
       "M",
       "L"
     ],
@@ -102,38 +123,15 @@
     ]
   },
   {
-    "id": 5,
-    "sku": "DEMO-PR-001",
-    "name": "Protector Bucal",
-    "brand": "MARCA DEMO",
-    "category": "protectores",
-    "price": 39,
-    "currency": "PEN",
-    "stock": "available",
-    "image": "images/products/product-placeholder.svg",
-    "description": "Producto DEMO para probar la categoría de protectores.",
-    "features": [
-      "Diseño DEMO",
-      "Material termomoldeable",
-      "Estuche incluido DEMO"
-    ],
-    "sizes": [
-      "Única"
-    ],
-    "colors": [
-      "Negro"
-    ]
-  },
-  {
     "id": 6,
-    "sku": "DEMO-SA-001",
+    "sku": "SACO-EVERLAS-001",
     "name": "Saco de Boxeo 120 cm",
-    "brand": "MARCA DEMO",
+    "brand": "EVERLAST",
     "category": "sacos",
     "price": 349,
     "currency": "PEN",
     "stock": "low",
-    "image": "images/products/product-placeholder.svg",
+    "image": "images/products/saco everlast blanco.jpg",
     "description": "Producto DEMO para probar productos de mayor precio.",
     "features": [
       "Altura DEMO 120 cm",
@@ -144,80 +142,7 @@
       "120 cm"
     ],
     "colors": [
-      "Negro"
-    ]
-  },
-  {
-    "id": 7,
-    "sku": "DEMO-RO-001",
-    "name": "Polo Training Combat",
-    "brand": "MARCA DEMO",
-    "category": "ropa",
-    "price": 69,
-    "currency": "PEN",
-    "stock": "soldout",
-    "image": "images/products/product-placeholder.svg",
-    "description": "Producto DEMO agotado para probar el estado de stock.",
-    "features": [
-      "Tela DEMO",
-      "Corte deportivo",
-      "Secado rápido DEMO"
-    ],
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "colors": [
-      "Negro",
-      "Gris"
-    ]
-  },
-  {
-    "id": 8,
-    "sku": "DEMO-MMA-001",
-    "name": "Guantes MMA Training",
-    "brand": "MARCA DEMO",
-    "category": "mma",
-    "price": 109,
-    "currency": "PEN",
-    "stock": "available",
-    "image": "images/products/product-placeholder.svg",
-    "description": "Producto DEMO para probar la categoría MMA.",
-    "features": [
-      "Acolchado DEMO",
-      "Cierre de velcro",
-      "Diseño para entrenamiento"
-    ],
-    "sizes": [
-      "M",
-      "L",
-      "XL"
-    ],
-    "colors": [
-      "Negro"
-    ]
-  },
-  {
-    "id": 1786651225932,
-    "sku": "sku-vendas-rosada-000",
-    "name": "vendas largas rosadas ",
-    "brand": "Mias",
-    "category": "vendas",
-    "price": 10,
-    "currency": "PEN",
-    "stock": "available",
-    "image": "images/products/producto.png",
-    "description": "vendeas de pruebas ",
-    "features": [
-      "largas"
-    ],
-    "sizes": [
-      "4.5m"
-    ],
-    "colors": [
-      "rosado"
+      "Blanco"
     ]
   }
 ]

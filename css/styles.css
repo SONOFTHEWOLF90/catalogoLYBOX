@@ -468,7 +468,7 @@ justify-content:center;
 .btn-secondary {
   border: 1px solid var(--color-border);
   background: var(--color-surface);
-  color: var(--color-text)
+  color: var(--colo)
 }
 
 .btn-whatsapp {
@@ -2439,15 +2439,6 @@ body{
   }
 
 }
-
-/*==================================
-  LYBOX - Carrusel de categorías móvil
-==================================*/
-
-@media (max-width:768px){
-
-
-
 
 
 .site-footer .footer-grid > div:last-child { display: grid; align-content: start; gap: 7px; }
