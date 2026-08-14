@@ -58,6 +58,8 @@ const state = {
 
 let favorites = JSON.parse(localStorage.getItem("lybox-favorites")) || [];
 
+let lastAddedFavorite = null;
+
 function saveFavorites() {
   localStorage.setItem("lybox-favorites", JSON.stringify(favorites));
   updateFavoritesUI();
@@ -67,15 +69,39 @@ function isFavorite(id) {
   return favorites.includes(id);
 }
 
+function openFavoritesDrawer(){
+
+  renderFavoritesDrawer();
+
+  document.querySelector("#favoritesDrawer").classList.add("open");
+
+}
+
+function closeFavoritesDrawer(){
+
+  document.querySelector("#favoritesDrawer").classList.remove("open");
+
+}
+
+
 function toggleFavorite(id) {
+
   if (isFavorite(id)) {
+
     favorites = favorites.filter(f => f !== id);
+    lastAddedFavorite = null;
+
   } else {
+
     favorites.push(id);
+    lastAddedFavorite = id;
+
   }
 
   saveFavorites();
   renderProducts();
+  renderFavoritesDrawer();
+
 }
 
 function updateFavoritesUI() {
@@ -91,6 +117,71 @@ function updateFavoritesUI() {
     }
   }
 }
+
+function renderFavoritesDrawer(){
+
+  const container = document.querySelector("#drawerItems");
+
+  if(!container) return;
+
+  const selected = products.filter(p => favorites.includes(p.id));
+
+  if(!selected.length){
+
+    container.innerHTML = `
+      <div class="drawer-empty">
+
+        <img src="images/icons/categories/gloves.svg"
+             class="drawer-empty-icon"
+             alt="">
+
+        <p>Aún no has agregado productos.</p>
+
+      </div>
+    `;
+
+    return;
+  }
+
+  container.innerHTML = selected.map(product => `
+
+    <div class="drawer-item ${product.id === lastAddedFavorite ? "is-new" : ""}">
+
+      <img
+        src="${product.image}"
+        alt="${product.name}"
+        class="drawer-item-image">
+
+      <div class="drawer-item-info">
+
+        <h4>${product.name}</h4>
+
+        <span>${formatPrice(product.price, product.currency)}</span>
+
+      </div>
+
+      <button
+        class="drawer-remove"
+        data-remove="${product.id}">
+        ✕
+      </button>
+
+    </div>
+
+  `).join("");
+
+  container.querySelectorAll("[data-remove]").forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+      toggleFavorite(Number(btn.dataset.remove));
+
+    });
+
+  });
+
+}
+
 
 const elements = {
   productsGrid: document.querySelector("#products-grid"),
@@ -175,17 +266,17 @@ function createProductCard(product) {
       <div class="product-image-wrap">
 
         <button
-  class="favorite-card-btn ${isFavorite(product.id) ? "active" : ""}"
-  type="button"
-  data-favorite="${product.id}"
-  aria-label="Guardar producto">
+          class="favorite-card-btn ${isFavorite(product.id) ? "active" : ""}"
+          type="button"
+          data-favorite="${product.id}"
+          aria-label="Guardar producto">
 
-  <img
-    src="images/icons/categories/gloves.svg"
-    class="favorite-icon"
-    alt="">
+          <img
+            src="images/icons/categories/gloves.svg"
+            class="favorite-icon"
+            alt="">
 
-</button>
+        </button>
 
         <img src="${product.image}" alt="${product.name}" loading="lazy">
 
@@ -213,7 +304,7 @@ function createProductCard(product) {
             class="btn btn-secondary btn-full"
             type="button"
             data-product-id="${product.id}">
-            Ver producto
+            Ver detalles
           </button>
 
           <a class="btn btn-whatsapp btn-full ${whatsappDisabled ? "is-disabled" : ""}"
@@ -528,6 +619,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (elements.sendFavorites) {
     elements.sendFavorites.addEventListener("click", sendFavoritesWhatsApp);
   }
+
+  elements.favoritesButton.addEventListener("click", openFavoritesDrawer);
+
+document
+  .querySelector("#closeDrawer")
+  .addEventListener("click", closeFavoritesDrawer);
+
+document
+  .querySelector(".drawer-backdrop")
+  .addEventListener("click", closeFavoritesDrawer);
+
+
 });
 
 window.addEventListener("resize", updateSidebarIndicator);

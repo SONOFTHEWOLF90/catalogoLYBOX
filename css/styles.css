@@ -225,6 +225,9 @@ button {
     background-position:center;
     background-repeat:no-repeat;
     overflow:hidden;
+    position:relative;
+    overflow:hidden;
+    padding:110px 0 140px;
 }
 
 #hero-title .accent{
@@ -232,15 +235,71 @@ button {
      
 }
 
+
+/* Franja roja con textura */
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+    left:0;
+    bottom:-2px;
+
+    width:100%;
+    height:95px;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            rgba(255,255,255,.05) 0 2px,
+            transparent 2px 8px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            rgba(0,0,0,.08) 0 2px,
+            transparent 2px 8px
+        ),
+        linear-gradient(
+            180deg,
+            #c41414 0%,
+            #aa0000 55%,
+            #7a0000 100%
+        );
+
+    clip-path:polygon(
+        0 58%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+    z-index:1;
+
+}
+
+
+/* Línea metálica */
+
 .hero::before{
+
     content:"";
     position:absolute;
-    inset:0;
-    background:
-        radial-gradient(circle at top right,
-        rgba(230,57,70,.22),
-        transparent 35%);
-    pointer-events:none;
+    left:-5%;
+    bottom:78px;
+    width:110%;
+    height:3px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.65),
+        rgba(255,255,255,.12),
+        transparent
+    );
+    transform:rotate(-3deg);
+    filter:blur(.4px);
+    z-index:2;
+
 }
 
 .hero-grid{
@@ -357,7 +416,8 @@ justify-content:center;
 }
 
 .btn-full {
-  flex: 1 1 140px;
+  width:100%;
+  flex:none;
 }
 
 .btn-large {
@@ -423,8 +483,8 @@ justify-content:center;
   color: var(--color-text-muted);
 }
 
-.section {
-  padding-block: 90px;
+.section{
+    padding:48px 0;
 }
 
 .categories-section {
@@ -510,6 +570,8 @@ justify-content:center;
   gap: 12px;
   margin-bottom: 14px;
 }
+
+
 
 .search-box,
 .sort-box {
@@ -647,9 +709,13 @@ justify-content:center;
   text-transform: uppercase;
 }
 
-.product-card-body {
-  padding: 17px;
+.product-card-body{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    padding:18px;
 }
+
 
 .product-brand {
   display: block;
@@ -1098,6 +1164,8 @@ justify-content:center;
   }
 }
 
+
+
 @media (max-width: 700px) {
   .section {
     padding-block: 65px;
@@ -1123,10 +1191,22 @@ justify-content:center;
     padding: 13px;
   }
 
-  .product-actions {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
+  .product-actions .btn{
+    width:100%;
+    min-height:46px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    transition:transform .25s ease;
+}
+
+
 
   .modal {
     padding: 0;
@@ -1847,8 +1927,354 @@ display:none;
 }
 
 
+/*==================================
+ MI SELECCIÓN (Drawer)
+==================================*/
 
+.favorites-drawer{
 
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+    z-index:3000;
+
+}
+
+.favorites-drawer.open{
+    pointer-events:auto;
+}
+
+.drawer-backdrop{
+
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+    transition:.25s;
+
+}
+
+.favorites-drawer.open .drawer-backdrop{
+    opacity:1;
+}
+
+.drawer-panel{
+
+    position:absolute;
+    top:0;
+    right:0;
+
+    width:380px;
+    max-width:100%;
+    height:100%;
+
+    background:#181B20;
+
+    border-left:1px solid rgba(255,255,255,.08);
+
+    box-shadow:-20px 0 40px rgba(0,0,0,.45);
+
+    display:flex;
+    flex-direction:column;
+
+    transform:translateX(100%);
+    transition:.3s cubic-bezier(.22,.61,.36,1);
+
+}
+
+.favorites-drawer.open .drawer-panel{
+    transform:translateX(0);
+}
+
+.drawer-header{
+
+    padding:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+}
+
+.drawer-title{
+
+    display:flex;
+    gap:14px;
+    align-items:center;
+
+}
+
+.drawer-icon{
+
+    width:28px;
+    height:28px;
+
+    filter:brightness(0) invert(1);
+
+}
+
+.drawer-title span{
+
+    color:#8a8f98;
+    font-size:.8rem;
+    letter-spacing:1px;
+
+}
+
+.drawer-title h2{
+
+    margin:4px 0 0;
+
+}
+
+.drawer-close{
+
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:1.5rem;
+    cursor:pointer;
+
+}
+
+/*==================================
+ Items del Drawer
+==================================*/
+
+.drawer-item{
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    padding:14px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+}
+
+.drawer-item-image{
+
+    width:58px;
+    height:58px;
+
+    border-radius:10px;
+
+    object-fit:cover;
+
+}
+
+.drawer-item-info{
+
+    flex:1;
+
+}
+
+.drawer-item-info h4{
+
+    margin:0 0 4px;
+
+    font-size:.95rem;
+
+}
+
+.drawer-item-info span{
+
+    color:#aa0000;
+    font-weight:700;
+
+}
+
+.drawer-remove{
+
+    width:32px;
+    height:32px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#222831;
+    color:#fff;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.drawer-remove:hover{
+
+    background:#aa0000;
+
+}
+
+.drawer-empty{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    height:100%;
+    color:#8a8f98;
+    text-align:center;
+
+}
+
+.drawer-empty-icon{
+
+    width:48px;
+    height:48px;
+    filter:brightness(0) invert(1);
+
+}
+
+.drawer-footer{
+
+    padding:20px;
+    border-top:1px solid rgba(255,255,255,.06);
+
+}
+
+.drawer-whatsapp{
+
+    width:100%;
+    padding:15px;
+
+    background:#aa0000;
+    color:#fff;
+
+    border:none;
+    border-radius:14px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+.drawer-whatsapp-icon{
+
+    width:20px;
+    height:20px;
+    filter:brightness(0) invert(1);
+
+}
+
+/*==================================
+ Animaciones LYBOX
+==================================*/
+
+.drawer-item.is-new{
+    animation:drawerSlide .35s cubic-bezier(.22,.61,.36,1);
+}
+
+@keyframes drawerSlide{
+
+    from{
+        opacity:0;
+        transform:translateX(26px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+
+}
+
+/* Pop del guante */
+
+.favorite-card-btn{
+    overflow:hidden;
+}
+
+.favorite-card-btn.active{
+    animation:glovePop .28s ease;
+}
+
+@keyframes glovePop{
+
+    0%{
+        transform:scale(.85);
+    }
+
+    55%{
+        transform:scale(1.15);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+/*==================================
+ HERO - Corte diagonal LYBOX
+==================================*/
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+    left:0;
+    bottom:-1px;
+
+    width:100%;
+    height:90px;
+
+    background:#aa0000;
+
+    clip-path:polygon(
+        0 55%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+    z-index:1;
+
+}
+
+/* Línea brillante encima del corte */
+
+.hero::before{
+
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:72px;
+    width:100%;
+    height:2px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+    transform:rotate(-3deg);
+    z-index:2;
+
+}
+
+/* El contenido siempre encima */
+
+.hero-grid{
+
+    position:relative;
+    z-index:3;
+
+}
 
 .site-footer .footer-grid > div:last-child { display: grid; align-content: start; gap: 7px; }
 .site-footer .footer-grid > div:last-child h3 { margin-bottom: 5px; }

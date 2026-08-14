@@ -85,14 +85,6 @@
 
   </section>
 
-  <section class="trust-bar">
-    <div class="container trust-grid">
-      <div>🚚 Envíos a todo el Perú</div>
-      <div>🛡️ Productos 100% originales</div>
-      <div>💳 Pago seguro</div>
-     <div>📲 Atención por WhatsApp</div>
-    </div>
-  </section>
 
  <!-- Categorías ocultas (el JS las necesita) -->
 <section id="categorias" hidden aria-hidden="true">
@@ -104,17 +96,11 @@
 
     <div class="container">
 
-      <div class="section-heading">
+      <div class="catalog-header">
 
-        <div>
+         <h2>Nuestros productos</h2>
 
-          <span class="eyebrow">CATÁLOGO</span>
-
-          <h2>Nuestros productos</h2>
-
-        </div>
-
-        <p id="product-count"></p>
+        <span id="product-count" class="catalog-count"></span>
 
       </div>
 
@@ -231,7 +217,72 @@
 
 </div>
 
+<!-- ========================= -->
+<!-- PANEL MI SELECCIÓN -->
+<!-- ========================= -->
+
+<div id="favoritesDrawer" class="favorites-drawer">
+
+  <div class="drawer-backdrop"></div>
+
+  <aside class="drawer-panel">
+
+    <div class="drawer-header">
+
+      <div class="drawer-title">
+
+        <img src="images/icons/categories/gloves.svg" alt="" class="drawer-icon">
+
+        <div>
+          <span>LYBOX</span>
+          <h2>Mi Selección</h2>
+        </div>
+
+      </div>
+
+      <button id="closeDrawer" class="drawer-close">✕</button>
+
+    </div>
+
+    <div id="drawerItems" class="drawer-items">
+
+      <div class="drawer-empty">
+
+        <img src="images/icons/categories/gloves.svg" alt="" class="drawer-empty-icon">
+
+        <p>Aún no has agregado productos.</p>
+
+      </div>
+
+    </div>
+
+    <div class="drawer-footer">
+
+      <button id="drawerWhatsApp" class="drawer-whatsapp">
+
+        <img src="images/icons/categories/gloves.svg" alt="" class="drawer-whatsapp-icon">
+
+        Enviar por WhatsApp
+
+      </button>
+
+    </div>
+
+  </aside>
+
+</div>
+
 <footer class="site-footer" id="contacto">
+
+  <section class="trust-bar">
+    <div class="container trust-grid">
+      <div>🚚 Envíos a todo el Perú</div>
+      <div>🛡️ Productos 100% originales</div>
+      <div>💳 Pago seguro</div>
+     <div>📲 Atención por WhatsApp</div>
+    </div>
+  </section>
+
 
   <div class="container footer-grid">
 
@@ -278,6 +329,7 @@
     <span>Catálogo online</span>
 
   </div>
+
 
 </footer>
 
