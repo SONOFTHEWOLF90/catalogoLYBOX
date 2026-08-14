@@ -468,6 +468,7 @@ justify-content:center;
 .btn-secondary {
   border: 1px solid var(--color-border);
   background: var(--color-surface);
+  color: var(--color-text)
 }
 
 .btn-whatsapp {
@@ -1245,6 +1246,7 @@ justify-content:center;
 
   .catalog-toolbar {
     grid-template-columns: 1fr;
+    display:block;
   }
 
   .products-grid {
@@ -1689,6 +1691,9 @@ transform:scale(1.08);
 .filter-btn.is-active{
     background:rgba(170,0,0,.12);
     border-left-color:#aa0000;
+    transform:translateY(-2px) scale(1.03);
+    box-shadow:0 8px 20px rgba(170,0,0,.25);
+    transition:.25s ease;
 }
 
 /* Iconos */
@@ -2328,22 +2333,80 @@ body{
 
   /* Buscador y ordenar uno debajo del otro */
   .catalog-toolbar{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+    display:block;
   }
+
+  .search-box{
+    width:100%;
+    margin-bottom:14px;
+  }
+
 
   .search-box,
   .sort-box{
-    width:100%;
+       display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    width:auto;
+    margin-bottom:16px;
   }
 
-  /* Categorías a ancho completo */
+ /* Fila horizontal */
   .filter-row{
-    width:100%;
-    margin:16px 0 24px;
+    display:flex !important;
+    align-items:center;
+    flex-wrap:nowrap;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:8px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
   }
 
+  .filter-row::-webkit-scrollbar{
+    display:none;
+  }
+
+  .filter-btn{
+    flex:0 0 auto;
+    min-width:78px;
+    padding:10px 12px;
+    border-radius:16px;
+  }
+
+  .category-icon{
+    width:20px;
+    height:20px;
+  }
+
+  /* El selector Ordenar entra en la fila */
+  .sort-box{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-left:6px;
+    padding:10px 12px;
+    border:1px solid var(--color-border);
+    border-radius:16px;
+    background:var(--color-surface);
+  }
+
+  .sort-box span{
+    display:none;
+  }
+
+  .sort-box select{
+    background:transparent;
+    border:none;
+    color:var(--color-text);
+    font-size:.85rem;
+    width:auto;
+    padding:0;
+  }
+
+}
   /* Productos a una sola columna */
   .products-grid{
     display:grid;
@@ -2376,6 +2439,17 @@ body{
   }
 
 }
-.site-footer .footer-grid > div:last-child { display: grid; align-content: start; gap: 7px; }
-.site-footer .footer-grid > div:last-child h3 { margin-bottom: 5px; }
 
+/*==================================
+  LYBOX - Carrusel de categorías móvil
+==================================*/
+
+@media (max-width:768px){
+
+
+
+
+
+.site-footer .footer-grid > div:last-child { display: grid; align-content: start; gap: 7px; }
+.site-footer .footer-grid > div:last-child h3 { margin-bottom: 5px; 
+}
