@@ -6,11 +6,9 @@
   <title>Implementos de Boxeo y MMA | LYBOX</title>
 
   <meta name="description" content="Catálogo de implementos para boxeo, MMA y deportes de combate. Consulta productos y disponibilidad directamente por WhatsApp.">
-
   <meta property="og:title" content="Implementos de Boxeo y MMA | LYBOX">
   <meta property="og:description" content="Equipamiento para boxeo, MMA y entrenamiento.">
   <meta property="og:type" content="website">
-
   <meta name="theme-color" content="#0b0d10">
 
   <link rel="stylesheet" href="css/styles.css">
@@ -21,25 +19,18 @@
 <header class="site-header" id="inicio">
 
   <div class="container header-inner">
-
     <a class="brand" href="#inicio" aria-label="LYBOX">
-
       <img class="brand-logo" src="images/logo/logo.png" alt="LYBOX">
-
       <span class="brand-text">LYBOX</span>
-
     </a>
 
     <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
-
       <span></span>
       <span></span>
       <span></span>
-
     </button>
 
     <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-
       <a href="#" id="home-link">Inicio</a>
       <a href="#categorias">Categorías</a>
       <a href="#productos">Productos</a>
@@ -48,8 +39,15 @@
       <a class="nav-whatsapp" data-whatsapp-general href="#" target="_blank" rel="noopener">
         WhatsApp
       </a>
-
     </nav>
+
+    <!-- NUEVO BOTÓN FAVORITOS -->
+    <div class="header-actions">
+      <button id="favoritesButton" class="favorites-button" aria-label="Favoritos">
+        ❤️
+        <span id="favoritesCount">0</span>
+      </button>
+    </div>
 
   </div>
 
@@ -58,41 +56,36 @@
 <main>
 
   <section class="hero" aria-labelledby="hero-title">
-
     <div class="container hero-grid">
-
       <div class="hero-copy">
-
         <span class="eyebrow">BOXEO · MMA · COMBATE</span>
-
-        <h1 id="hero-title">Todo lo que necesitas para subir al ring</h1>
-
+        
+        <h1 id="hero-title">
+          TODO LO QUE NECESITAS PARA SUBIR AL <span class="accent">RING</span>
+        </h1>
+        
         <p>Equipamiento para boxeo, MMA y entrenamiento.</p>
-
+       
         <div class="hero-actions">
-
-          <a class="btn btn-primary" href="#productos">Ver productos</a>
-
+          <a class="btn btn-primary" href="#productos">Ver catálogo</a>
+          
           <a class="btn btn-outline" data-whatsapp-general href="#" target="_blank" rel="noopener">
             Consultar por WhatsApp
           </a>
-
         </div>
-
-      </div>
-
-      <div class="hero-visual">
-
-        <div class="hero-image">
-            <img src="images/banners/hero.jpg"
-           alt="Entrenamiento de boxeo"
-            loading="eager">
-        </div>
-
       </div>
 
     </div>
 
+  </section>
+
+  <section class="trust-bar">
+    <div class="container trust-grid">
+      <div>🚚 Envíos a todo el Perú</div>
+      <div>🛡️ Productos 100% originales</div>
+      <div>💳 Pago seguro</div>
+     <div>📲 Atención por WhatsApp</div>
+    </div>
   </section>
 
   <section class="section categories-section" id="categorias">
@@ -299,6 +292,10 @@
   </div>
 
 </footer>
+
+  <button id="sendFavorites" class="send-favorites hidden">
+    ❤️ Enviar lista
+  </button>
 
 <script src="js/script.js"></script>
 

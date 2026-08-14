@@ -14,6 +14,7 @@
   --color-success: #49c27b;
   --color-warning: #f0b429;
   --color-danger: #ef5a5a;
+  --lybox-red:#aa0000;
   --shadow-soft: 0 16px 45px rgba(0, 0, 0, 0.22);
   --radius-sm: 10px;
   --radius-md: 16px;
@@ -92,7 +93,7 @@ button {
 .eyebrow {
   display: inline-block;
   margin-bottom: 10px;
-  color: var(--color-primary);
+  color: var(--lybox-red);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -169,7 +170,7 @@ button {
 .main-nav .nav-whatsapp {
   padding: 10px 16px;
   border-radius: 999px;
-  background: var(--color-primary);
+  background: var(--lybox-red);
   color: #fff;
 }
 
@@ -202,63 +203,107 @@ button {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-.hero {
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid var(--color-border);
-  background:
-    radial-gradient(circle at 80% 30%, rgba(226, 59, 46, 0.16), transparent 30%),
-    linear-gradient(135deg, #0b0d10 0%, #11151a 100%);
+/* =========================================
+   HERO BANNER PREMIUM LYBOX
+========================================= */
+
+.hero{
+    position:relative;
+    min-height:720px;
+    display:flex;
+    align-items:center;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,8,8,.88) 0%,
+            rgba(8,8,8,.72) 45%,
+            rgba(8,8,8,.45) 100%
+        ),
+        url("../images/banners/hero.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    overflow:hidden;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  right: -100px;
-  bottom: -180px;
-  width: 420px;
-  height: 420px;
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 50%;
+#hero-title .accent{
+  color:var(--lybox-red);
+     
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 50px;
-  align-items: center;
-  min-height: 600px;
-  padding-block: 70px;
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at top right,
+        rgba(230,57,70,.22),
+        transparent 35%);
+    pointer-events:none;
 }
 
-.hero-copy h1,
-.section-heading h2,
-.modal-details h2 {
-  margin: 0;
-  font-family: "Barlow Condensed", sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 0.98;
+.hero-grid{
+    position:relative;
+    z-index:2;
 }
 
-.hero-copy h1 {
-  max-width: 680px;
-  font-size: clamp(3.5rem, 7vw, 6.6rem);
-  text-transform: uppercase;
+.hero-copy{
+    max-width:620px;
 }
 
-.hero-copy p {
-  max-width: 560px;
-  margin: 24px 0 30px;
-  color: var(--color-text-muted);
-  font-size: 1.1rem;
+.hero-copy .eyebrow{
+    display:inline-block;
+    margin-bottom:18px;
+    color:#aa0000; /* rojo LYBOX */
+    font-weight:700;
+    letter-spacing:.22em;
 }
 
-.hero-actions,
-.product-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.hero-copy h1{
+    color:white;
+    font-size:clamp(2.8rem,6vw,5rem);
+    line-height:1.02;
+    margin-bottom:22px;
+    font-weight:900;
+}
+
+.hero-copy p{
+    color:#E5E5E5;
+    font-size:1.2rem;
+    line-height:1.7;
+    margin-bottom:34px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
+/* Móvil */
+
+@media(max-width:768px){
+
+.hero{
+min-height:560px;
+background-position:65% center;
+
+}
+
+.hero-copy{
+
+text-align:center;
+margin:auto;
+
+}
+
+.hero-actions{
+
+justify-content:center;
+
+}
+
 }
 
 .btn {
@@ -278,7 +323,7 @@ button {
 }
 
 .btn-primary {
-  background: var(--color-primary);
+  background: var(--lybox-red);
   color: #fff;
 }
 
@@ -440,7 +485,7 @@ button {
   place-items: center;
   border-radius: 10px;
   background: rgba(226,59,46,0.1);
-  color: var(--color-primary);
+  color: var(--lybox-red);
   font-size: 1.4rem;
 }
 
@@ -536,7 +581,7 @@ button {
 .filter-btn {
   flex: 0 0 auto;
   padding: 9px 14px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--lybox-red);
   border-radius: 999px;
   background: transparent;
   color: var(--color-text-muted);
@@ -547,7 +592,7 @@ button {
 .filter-btn:hover,
 .filter-btn.is-active {
   border-color: var(--color-primary);
-  background: var(--color-primary);
+  background: var(--lybox-red);
   color: #fff;
 }
 
@@ -609,7 +654,7 @@ button {
 .product-brand {
   display: block;
   margin-bottom: 4px;
-  color: var(--color-primary);
+  color: var(--lybox-red);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -1180,8 +1225,186 @@ button {
     display:block;
 }
 
+/* =========================================
+   LYBOX v1.0.1 - Tarjetas Premium
+========================================= */
 
+.product-card{
+    position:relative;
+    overflow:hidden;
+    transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
+}
 
+.product-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 22px 45px rgba(0,0,0,.45);
+    border-color:rgba(230,57,70,.45);
+}
+
+.product-image{
+    overflow:hidden;
+}
+
+.product-image img{
+    transition:transform .35s ease;
+}
+
+.product-card:hover .product-image img{
+    transform:scale(1.08);
+}
+
+/* Badge de stock */
+
+.stock-badge{
+    position:absolute;
+    top:14px;
+    left:14px;
+    padding:7px 12px;
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:white;
+}
+
+.stock-badge.available{
+    background:#16a34a;
+}
+
+.stock-badge.low{
+    background:#ea580c;
+}
+
+.stock-badge.soldout{
+    background:#525252;
+}
+
+/* Botón WhatsApp */
+
+.btn-whatsapp{
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.btn-whatsapp:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(37,211,102,.35);
+}
+
+/* Precio */
+
+.product-price{
+    font-weight:700;
+}
+
+.product-price.old{
+    color:#8a8a8a;
+    text-decoration:line-through;
+}
+
+.trust-bar{
+    border-top:1px solid rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    background:rgba(255,255,255,.02);
+}
+
+.trust-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    padding:18px 0;
+    text-align:center;
+    font-weight:600;
+}
+
+@media(max-width:768px){
+    .trust-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+/* =========================================
+   FAVORITOS LYBOX
+========================================= */
+
+.header-actions{
+display:flex;
+align-items:center;
+margin-left:20px;
+}
+
+.favorites-button{
+position:relative;
+width:46px;
+height:46px;
+border-radius:50%;
+background:#181818;
+border:1px solid rgba(255,255,255,.08);
+font-size:20px;
+transition:.2s;
+}
+
+.favorites-button:hover{
+background:#242424;
+transform:translateY(-2px);
+}
+
+.favorites-button span{
+position:absolute;
+top:-6px;
+right:-6px;
+background:var(--lybox-red);
+color:white;
+font-size:.72rem;
+min-width:22px;
+height:22px;
+border-radius:50%;
+display:grid;
+place-items:center;
+font-weight:700;
+}
+
+.favorite-toggle{
+position:absolute;
+top:14px;
+right:14px;
+width:38px;
+height:38px;
+border-radius:50%;
+background:rgba(15,15,15,.75);
+color:white;
+font-size:20px;
+transition:.25s;
+}
+
+.favorite-toggle.active{
+background:#e63946;
+transform:scale(1.08);
+}
+
+.send-favorites{
+position:fixed;
+right:22px;
+bottom:95px;
+z-index:120;
+background:#25D366;
+color:white;
+padding:14px 20px;
+border-radius:999px;
+font-weight:700;
+box-shadow:0 14px 30px rgba(37,211,102,.35);
+transition:.25s;
+}
+
+.send-favorites.hidden{
+display:none;
+}
 .site-footer .footer-grid > div:last-child { display: grid; align-content: start; gap: 7px; }
 .site-footer .footer-grid > div:last-child h3 { margin-bottom: 5px; }
 

@@ -3,6 +3,8 @@
  * Cambia únicamente WHATSAPP_NUMBER para configurar el contacto.
  */let products = [];
 
+  let favorites = JSON.parse(localStorage.getItem("lyboxFavorites")) || [];
+
 async function loadProducts() {
   try {
     const response = await fetch("data/products.json");
@@ -47,10 +49,19 @@ const elements = {
   searchInput: document.querySelector("#search-input"),
   sortSelect: document.querySelector("#sort-select"),
   clearFilters: document.querySelector("#clear-filters"),
+
+  // Modal
   modal: document.querySelector("#product-modal"),
   modalContent: document.querySelector("#modal-content"),
+
+  // Navegación
   menuToggle: document.querySelector(".menu-toggle"),
-  mainNav: document.querySelector("#main-nav")
+  mainNav: document.querySelector("#main-nav"),
+
+  // Favoritos
+  favoritesButton: document.querySelector("#favoritesButton"),
+  favoritesCount: document.querySelector("#favoritesCount"),
+  sendFavorites: document.querySelector("#sendFavorites")
 };
 
 let currentGallery = [];
@@ -346,19 +357,14 @@ elements.menuToggle.addEventListener("click", toggleMobileMenu);
   });
 }
 
-function init() {
-  updateGeneralWhatsAppLinks();
-  renderCategories();
-  renderFooterCategories();
-  renderFilters();
-  renderProducts();
-  initEvents();
 
-  document.querySelector("#current-year").textContent = new Date().getFullYear();
-}
 
 document.addEventListener("DOMContentLoaded", async () => {
   await loadProducts();
-  initEvents();
+
   updateGeneralWhatsAppLinks();
+  initEvents();
+
+  document.querySelector("#current-year").textContent =
+    new Date().getFullYear();
 });

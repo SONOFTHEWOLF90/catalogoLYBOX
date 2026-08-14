@@ -1,0 +1,1 @@
+Coloca hero.jpg aquí.
