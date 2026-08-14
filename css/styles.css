@@ -100,107 +100,169 @@ button {
   text-transform: uppercase;
 }
 
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid var(--color-border);
-  background: rgba(11, 13, 16, 0.92);
-  backdrop-filter: blur(14px);
+/*==================================
+  HEADER
+==================================*/
+
+.site-header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(11,13,16,.92);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 76px;
+.header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    height:78px;
+    gap:24px;
 }
 
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 800;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    text-decoration:none;
+    color:inherit;
 }
 
-.brand-mark {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  border-radius: 9px;
-  background: var(--color-primary);
-  color: #fff;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 800;
-  transform: skew(-7deg);
+.brand-logo{
+    width:46px;
+    height:46px;
+    object-fit:contain;
 }
 
-.brand-logo {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  flex-shrink: 0;
+.brand-text{
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:1.8rem;
+    font-weight:700;
+    letter-spacing:.04em;
 }
 
-.brand-text {
-  max-width: 220px;
-  font-size: 0.9rem;
-  line-height: 1.1;
+/*==================================
+  NAVEGACIÓN
+==================================*/
+
+.main-nav{
+    display:flex;
+    align-items:center;
+    gap:24px;
 }
 
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: 28px;
+.main-nav a{
+    position:relative;
+
+    color:var(--color-text);
+    font-weight:600;
+    text-decoration:none;
+
+    transition:color .25s ease;
 }
 
-.main-nav a {
-  color: var(--color-text-muted);
-  font-size: 0.92rem;
-  font-weight: 600;
-  transition: color 0.2s ease;
+.main-nav a:hover{
+    color:var(--lybox-red);
 }
 
-.main-nav a:hover {
-  color: var(--color-text);
+/* Subrayado elegante */
+
+.main-nav a:not(.nav-whatsapp)::after{
+
+    content:"";
+
+    position:absolute;
+    left:0;
+    bottom:-6px;
+
+    width:0;
+    height:2px;
+
+    background:var(--lybox-red);
+
+    transition:width .25s ease;
+
 }
 
-.main-nav .nav-whatsapp {
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: var(--lybox-red);
-  color: #fff;
+.main-nav a:not(.nav-whatsapp):hover::after{
+    width:100%;
 }
 
-.menu-toggle {
-  display: none;
-  width: 44px;
-  height: 44px;
-  padding: 9px;
-  border-radius: 10px;
-  background: var(--color-surface-light);
+/*==================================
+  BOTÓN WHATSAPP HEADER
+==================================*/
+
+.nav-whatsapp{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:var(--lybox-red);
+    color:#fff !important;
+
+    font-weight:700;
+
+    transition:.25s ease;
+
 }
 
-.menu-toggle span {
-  display: block;
-  height: 2px;
-  margin: 5px 0;
-  background: var(--color-text);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+.nav-whatsapp:hover{
+
+    transform:translateY(-2px);
+    background:#7a0000;
+
 }
 
-.menu-toggle.is-open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+/*==================================
+  FAVORITOS
+==================================*/
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.menu-toggle.is-open span:nth-child(2) {
-  opacity: 0;
+.favorites-button{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:46px;
+    height:46px;
+    border:none;
+    border-radius:50%;
+    background:var(--color-surface);
+    cursor:pointer;
+    transition:.25s ease;
 }
 
-.menu-toggle.is-open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+.favorites-button:hover{
+    transform:translateY(-2px);
+}
+
+#favoritesCount{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    width:20px;
+    height:20px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:var(--lybox-red);
+    color:#fff;
+    font-size:.72rem;
+    font-weight:700;
 }
 
 /* =========================================
@@ -303,8 +365,10 @@ button {
 }
 
 .hero-grid{
+    display:grid;
+    align-items:center;
     position:relative;
-    z-index:2;
+    z-index:3;
 }
 
 .hero-copy{
@@ -1419,36 +1483,6 @@ align-items:center;
 margin-left:20px;
 }
 
-.favorites-button{
-position:relative;
-width:46px;
-height:46px;
-border-radius:50%;
-background:#181818;
-border:1px solid rgba(255,255,255,.08);
-font-size:20px;
-transition:.2s;
-}
-
-.favorites-button:hover{
-background:#242424;
-transform:translateY(-2px);
-}
-
-.favorites-button span{
-position:absolute;
-top:-6px;
-right:-6px;
-background:var(--lybox-red);
-color:white;
-font-size:.72rem;
-min-width:22px;
-height:22px;
-border-radius:50%;
-display:grid;
-place-items:center;
-font-weight:700;
-}
 
 .favorite-toggle{
 position:absolute;
@@ -2219,63 +2253,129 @@ display:none;
 }
 
 /*==================================
- HERO - Corte diagonal LYBOX
+ HERO MOBILE FULL WIDTH LYBOX
 ==================================*/
 
-.hero::after{
+@media (max-width: 768px){
 
-    content:"";
+  .hero{
+    min-height:100svh;
+    padding:32px 0 120px;
 
-    position:absolute;
-    left:0;
-    bottom:-1px;
+    /* La imagen llena toda la pantalla */
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
+  }
 
+/* ===== Hero móvil a ancho completo ===== */
+@media (max-width:768px){
+
+  .hero .container{
+    max-width:100%;
     width:100%;
-    height:90px;
+    padding-left:0;
+    padding-right:0;
+  }
 
-    background:#aa0000;
-
-    clip-path:polygon(
-        0 55%,
-        100% 0,
-        100% 100%,
-        0 100%
-    );
-
-    z-index:1;
+  .hero-copy{
+    padding:0 20px;
+  }
 
 }
 
-/* Línea brillante encima del corte */
+/* ===== Evitar desbordamiento horizontal ===== */
+/* ===== Arreglo responsive del catálogo ===== */
 
-.hero::before{
+html,
+body{
+    overflow-x:hidden;
+}
 
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:72px;
+@media (max-width:768px){
+
+  .products-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:20px;
     width:100%;
-    height:2px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.35),
-        transparent
-    );
-    transform:rotate(-3deg);
-    z-index:2;
+  }
+
+  .product-card{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0;
+  }
+
+  .product-image-wrap{
+    width:100%;
+  }
 
 }
 
-/* El contenido siempre encima */
+/*==================================
+  LYBOX - Catálogo móvil
+==================================*/
+@media (max-width:768px){
 
-.hero-grid{
 
-    position:relative;
-    z-index:3;
 
+  .catalog-sidebar,
+  .catalog-main{
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  /* Buscador y ordenar uno debajo del otro */
+  .catalog-toolbar{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .search-box,
+  .sort-box{
+    width:100%;
+  }
+
+  /* Categorías a ancho completo */
+  .filter-row{
+    width:100%;
+    margin:16px 0 24px;
+  }
+
+  /* Productos a una sola columna */
+  .products-grid{
+    display:grid;
+    grid-template-columns:1fr !important;
+    gap:20px;
+    width:100%;
+  }
+
+  .product-card{
+    width:100%;
+    max-width:100%;
+  }
 }
 
+
+
+/* ===== FIX catálogo móvil ===== */
+@media (max-width:768px){
+
+  .products-section > .container{
+    display:block !important;
+    grid-template-columns:none !important;
+  }
+
+  .products-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    width:100%;
+    gap:20px;
+  }
+
+}
 .site-footer .footer-grid > div:last-child { display: grid; align-content: start; gap: 7px; }
 .site-footer .footer-grid > div:last-child h3 { margin-bottom: 5px; }
 
