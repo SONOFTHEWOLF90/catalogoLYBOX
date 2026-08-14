@@ -3,8 +3,6 @@
  * Cambia únicamente WHATSAPP_NUMBER para configurar el contacto.
  */let products = [];
 
-  let favorites = JSON.parse(localStorage.getItem("lyboxFavorites")) || [];
-
 async function loadProducts() {
   try {
     const response = await fetch("data/products.json");
@@ -22,15 +20,30 @@ async function loadProducts() {
 const WHATSAPP_NUMBER = "51986437411";
 
 const CATEGORY_META = {
-  all: { label: "Todas", icon: "◈" },
-  guantes: { label: "Guantes de Boxeo", icon: "◉" },
-  vendas: { label: "Vendas", icon: "≋" },
-  cascos: { label: "Cascos", icon: "⬡" },
-  protectores: { label: "Protectores", icon: "◇" },
-  sacos: { label: "Sacos", icon: "▣" },
-  ropa: { label: "Ropa", icon: "□" },
-  accesorios: { label: "Accesorios", icon: "◆" },
-  mma: { label: "MMA", icon: "✦" }
+  all: {
+    label: "Todos",
+    icon: "images/icons/categories/all.svg"
+  },
+  polos: {
+    label: "Polos",
+    icon: "images/icons/categories/shirt.svg"
+  },
+  shorts: {
+    label: "Shorts",
+    icon: "images/icons/categories/shorts.svg"
+  },
+  guantes: {
+    label: "Guantes",
+    icon: "images/icons/categories/gloves.svg"
+  },
+  vendas: {
+    label: "Vendas",
+    icon: "images/icons/categories/wraps.svg"
+  },
+  sacos: {
+    label: "Sacos",
+    icon: "images/icons/categories/bag.svg"
+  }
 };
 
 const state = {
@@ -38,6 +51,46 @@ const state = {
   search: "",
   sort: "recommended"
 };
+
+// ===============================
+// FAVORITOS
+// ===============================
+
+let favorites = JSON.parse(localStorage.getItem("lybox-favorites")) || [];
+
+function saveFavorites() {
+  localStorage.setItem("lybox-favorites", JSON.stringify(favorites));
+  updateFavoritesUI();
+}
+
+function isFavorite(id) {
+  return favorites.includes(id);
+}
+
+function toggleFavorite(id) {
+  if (isFavorite(id)) {
+    favorites = favorites.filter(f => f !== id);
+  } else {
+    favorites.push(id);
+  }
+
+  saveFavorites();
+  renderProducts();
+}
+
+function updateFavoritesUI() {
+  if (elements.favoritesCount) {
+    elements.favoritesCount.textContent = favorites.length;
+  }
+
+  if (elements.sendFavorites) {
+    if (favorites.length) {
+      elements.sendFavorites.classList.remove("hidden");
+    } else {
+      elements.sendFavorites.classList.add("hidden");
+    }
+  }
+}
 
 const elements = {
   productsGrid: document.querySelector("#products-grid"),
@@ -118,27 +171,61 @@ function createProductCard(product) {
 
   return `
     <article class="product-card">
+
       <div class="product-image-wrap">
+
+        <button
+  class="favorite-card-btn ${isFavorite(product.id) ? "active" : ""}"
+  type="button"
+  data-favorite="${product.id}"
+  aria-label="Guardar producto">
+
+  <img
+    src="images/icons/categories/gloves.svg"
+    class="favorite-icon"
+    alt="">
+
+</button>
+
         <img src="${product.image}" alt="${product.name}" loading="lazy">
+
         <span class="category-badge">${getCategoryLabel(product.category)}</span>
+
       </div>
+
       <div class="product-card-body">
+
         <span class="product-brand">${product.brand}</span>
+
         <h3>${product.name}</h3>
+
         <p class="product-sku">SKU: ${product.sku}</p>
+
         <div class="product-price">${formatPrice(product.price, product.currency)}</div>
+
         <span class="stock-status ${stock.className}">
           <span class="stock-dot" aria-hidden="true"></span>${stock.label}
         </span>
+
         <div class="product-actions">
-          <button class="btn btn-secondary btn-full" type="button" data-product-id="${product.id}">Ver producto</button>
+
+          <button
+            class="btn btn-secondary btn-full"
+            type="button"
+            data-product-id="${product.id}">
+            Ver producto
+          </button>
+
           <a class="btn btn-whatsapp btn-full ${whatsappDisabled ? "is-disabled" : ""}"
              href="${whatsappDisabled ? "#" : generateWhatsAppLink(product)}"
              ${whatsappDisabled ? 'aria-disabled="true"' : 'target="_blank" rel="noopener"'}>
             ${whatsappDisabled ? "Agotado" : "WhatsApp"}
           </a>
+
         </div>
+
       </div>
+
     </article>
   `;
 }
@@ -179,24 +266,50 @@ function getFilteredProducts() {
 function renderProducts() {
   const filteredProducts = getFilteredProducts();
 
-  elements.productsGrid.innerHTML = filteredProducts.map(createProductCard).join("");
+  elements.productsGrid.innerHTML = filteredProducts
+    .map(createProductCard)
+    .join("");
+
   elements.emptyState.hidden = filteredProducts.length !== 0;
 
   const noun = filteredProducts.length === 1 ? "producto" : "productos";
   elements.productCount.textContent = `${filteredProducts.length} ${noun}`;
 
+  // Abrir modal del producto
   elements.productsGrid.querySelectorAll("[data-product-id]").forEach((button) => {
     button.addEventListener("click", () => {
       openProductModal(Number(button.dataset.productId));
     });
   });
+
+  // Activar botones de favoritos
+  elements.productsGrid.querySelectorAll("[data-favorite]").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.stopPropagation(); // evita abrir el modal
+      toggleFavorite(Number(button.dataset.favorite));
+    });
+  });
+
+  // Actualizar contador del header
+  updateFavoritesUI();
 }
 
 function renderFilters() {
   elements.filterRow.innerHTML = Object.entries(CATEGORY_META)
     .map(([key, meta]) => `
-      <button class="filter-btn ${state.category === key ? "is-active" : ""}" type="button" data-category="${key}">
-        ${meta.label}
+      <button
+        class="filter-btn ${state.category === key ? "is-active" : ""}"
+        type="button"
+        data-category="${key}">
+
+        <img
+          class="category-icon"
+          src="${meta.icon}"
+          alt="${meta.label}"
+          onerror="this.style.display='none'">
+
+        <span>${meta.label}</span>
+
       </button>
     `).join("");
 
@@ -207,7 +320,34 @@ function renderFilters() {
       renderProducts();
     });
   });
+
+  updateSidebarIndicator();
+  
 }
+
+
+function updateSidebarIndicator(){
+
+  const sidebar = elements.filterRow;
+  if(!sidebar) return;
+
+  let indicator = sidebar.querySelector(".sidebar-indicator");
+
+  if(!indicator){
+    indicator = document.createElement("div");
+    indicator.className = "sidebar-indicator";
+    sidebar.prepend(indicator);
+  }
+
+  const active = sidebar.querySelector(".filter-btn.is-active");
+  if(!active) return;
+
+  indicator.style.height = active.offsetHeight + "px";
+  indicator.style.transform = `translateY(${active.offsetTop}px)`;
+
+}
+
+
 
 function renderCategories() {
   const categoryEntries = Object.entries(CATEGORY_META).filter(([key]) => key !== "all");
@@ -357,7 +497,23 @@ elements.menuToggle.addEventListener("click", toggleMobileMenu);
   });
 }
 
+function sendFavoritesWhatsApp() {
 
+  const selected = products.filter(p => favorites.includes(p.id));
+
+  if (!selected.length) return;
+
+  let message = "Hola, me interesan estos productos:\n\n";
+
+  selected.forEach(p => {
+    message += `• ${p.name} (${p.sku})\n`;
+  });
+
+  window.open(
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
   await loadProducts();
@@ -367,4 +523,34 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.querySelector("#current-year").textContent =
     new Date().getFullYear();
+
+  // Favoritos
+  if (elements.sendFavorites) {
+    elements.sendFavorites.addEventListener("click", sendFavoritesWhatsApp);
+  }
 });
+
+window.addEventListener("resize", updateSidebarIndicator);
+
+// ===============================
+// ENVIAR FAVORITOS POR WHATSAPP
+// ===============================
+
+//elements.sendFavorites.addEventListener("click", () => {
+
+ // const selected = products.filter(p => favorites.includes(p.id));
+
+ // if (!selected.length) return;
+
+ // let message = "Hola, me interesan estos productos:%0A%0A";
+
+ // selected.forEach(p => {
+ //   message += `• ${p.name} (${p.sku})%0A`;
+//  });
+
+ // window.open(
+//    `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`,
+//    "_blank"
+//  );
+
+//});

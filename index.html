@@ -44,8 +44,14 @@
     <!-- NUEVO BOTÓN FAVORITOS -->
     <div class="header-actions">
       <button id="favoritesButton" class="favorites-button" aria-label="Favoritos">
-        ❤️
+
+        <img
+          src="images/icons/categories/gloves.svg"
+          class="header-favorite-icon"
+          alt="">
+
         <span id="favoritesCount">0</span>
+
       </button>
     </div>
 
@@ -88,29 +94,11 @@
     </div>
   </section>
 
-  <section class="section categories-section" id="categorias">
+ <!-- Categorías ocultas (el JS las necesita) -->
+<section id="categorias" hidden aria-hidden="true">
+  <div id="categories-grid"></div>
+</section>
 
-    <div class="container">
-
-      <div class="section-heading">
-
-        <div>
-
-          <span class="eyebrow">EQUIPAMIENTO</span>
-
-          <h2>Explora por categoría</h2>
-
-        </div>
-
-        <p>Encuentra rápidamente el equipo que necesitas.</p>
-
-      </div>
-
-      <div class="categories-grid" id="categories-grid"></div>
-
-    </div>
-
-  </section>
 
   <section class="section products-section" id="productos">
 
@@ -294,7 +282,11 @@
 </footer>
 
   <button id="sendFavorites" class="send-favorites hidden">
-    ❤️ Enviar lista
+    <img 
+      src="images/icons/categories/gloves.svg"
+      class="send-favorite-icon"
+      alt="">
+    Enviar lista
   </button>
 
 <script src="js/script.js"></script>
