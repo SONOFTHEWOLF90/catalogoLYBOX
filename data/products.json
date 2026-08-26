@@ -8,11 +8,11 @@
     "price": 60,
     "currency": "PEN",
     "stock": "available",
-    "image": "images/products/polos-3.webp",
+    "image": "images/products/polo-the-power-of-the-jab.webp",
     "images": [
-      "images/products/polos-3.webp",
-      "images/products/polos.webp",
-      "images/products/polos-2.webp"
+      "images/products/polo-the-power-of-the-jab.webp",
+      "images/products/polo-the-power-of-the-jab-3.webp",
+      "images/products/polo-the-power-of-the-jab-2.webp"
     ],
     "description": "Polo deportivo con diseño inspirado en el boxeo y la técnica del jab. Una prenda ideal para los amantes del deporte de combate, perfecta para actividades deportivas o para lucir tu pasión por el boxeo en el día a día.",
     "features": [
@@ -131,6 +131,104 @@
       "Negro",
       "Rojo",
       "Azul"
+    ]
+  },
+  {
+    "id": 10,
+    "sku": "LY-PSP-001",
+    "name": "Polo Sparring",
+    "brand": "LYBOX",
+    "category": "polos",
+    "price": 60,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/polo-sparring.webp",
+    "images": [
+      "images/products/polo-sparring.webp",
+      "images/products/polo-sparring-3.webp",
+      "images/products/polo-sparring-2.webp"
+    ],
+    "description": "Polo negro de estilo deportivo inspirado en el entrenamiento de boxeo y el sparring. Presenta un diseño posterior con la palabra “SPARRING”. Una prenda ideal para quienes practican boxeo y deportes de combate, combinando un diseño deportivo con un estilo urbano para usar dentro o fuera del gimnasio.",
+    "features": [
+      "Diseño inspirado en el sparring",
+      "Estampado posterior \"SPARRING\"",
+      "Color negro",
+      "Estilo deportivo y urbano"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": 11,
+    "sku": "LY-PFM-001",
+    "name": "Polo Floyd Mayweather",
+    "brand": "LYBOX",
+    "category": "polos",
+    "price": 60,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/polo-floyd-mayweather.webp",
+    "images": [
+      "images/products/polo-floyd-mayweather.webp",
+      "images/products/polo-floyd-mayweather-3.webp",
+      "images/products/polo-floyd-mayweather-2.webp"
+    ],
+    "description": "Polo negro con diseño inspirado en Floyd Mayweather y su estilo característico dentro del boxeo. El estampado posterior presenta una ilustración del boxeador acompañada de la frase “HIT AND DON'T GET HIT”.\n\nUna prenda pensada para los aficionados al boxeo y a las figuras históricas del deporte, ideal para complementar un estilo deportivo y urbano.",
+    "features": [
+      "Diseño inspirado en Floyd Mayweather",
+      "Ilustración de boxeador",
+      "Estampado posterior",
+      "Frase \"HIT AND DON'T GET HIT\"",
+      "Estilo deportivo y urbano"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": 12,
+    "sku": "LY-PMT-001",
+    "name": "Polo Mike Tyson",
+    "brand": "LYBOX",
+    "category": "polos",
+    "price": 60,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/polo-mike-tyson.webp",
+    "images": [
+      "images/products/polo-mike-tyson.webp",
+      "images/products/polo-mike-tyson-2.webp",
+      "images/products/polo-mike-tyson-3.webp"
+    ],
+    "description": "Polo negro con diseño inspirado en Mike Tyson y su trayectoria en el boxeo. El estampado posterior presenta una ilustración del boxeador acompañada de la frase “EVERYBODY HAS A PLAN... UNTIL THEY GET HIT”.\n\nUna prenda ideal para los aficionados al boxeo que buscan un diseño llamativo relacionado con una de las figuras más reconocidas de este deporte.",
+    "features": [
+      "Diseño inspirado en Mike Tyson",
+      "Ilustración de boxeador",
+      "Estampado posterior",
+      "Frase \"EVERYBODY HAS A PLAN... UNTIL THEY GET HIT\"",
+      "Estilo deportivo y urbano"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Negro"
     ]
   }
 ]
