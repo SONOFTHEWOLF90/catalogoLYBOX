@@ -147,7 +147,7 @@
     "name": "Short de Boxeo",
     "brand": "LYBOX",
     "category": "shorts",
-    "price": 1,
+    "price": 80,
     "currency": "PEN",
     "stock": "available",
     "image": "images/products/short-de-boxeo-5.webp",
@@ -164,6 +164,39 @@
       "tejido ligero",
       "cintura elástica",
       "cómodo para entrenamiento y competición"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": 8,
+    "sku": "LY-SE-001",
+    "name": "Short de Entrenamiento",
+    "brand": "LYBOX",
+    "category": "shorts",
+    "price": 80,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/short-de-entrenamiento-4.webp",
+    "images": [
+      "images/products/short-de-entrenamiento-4.webp",
+      "images/products/short-de-entrenamiento-3.webp",
+      "images/products/short-de-entrenamiento.webp",
+      "images/products/short-de-entrenamiento-2.webp"
+    ],
+    "description": "Short deportivo ligero y cómodo, diseñado para entrenamientos de boxeo, gimnasio y deportes de combate.",
+    "features": [
+      "Diseño ligero",
+      "libertad de movimiento",
+      "cintura elástica",
+      "tejido cómodo para sesiones de entrenamiento."
     ],
     "sizes": [
       "S",
