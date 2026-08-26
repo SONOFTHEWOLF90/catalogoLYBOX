@@ -2286,7 +2286,7 @@ display:none;
     background-position:center center;
     background-repeat:no-repeat;
   }
-
+ }
 /* ===== Hero móvil a ancho completo ===== */
 @media (max-width:768px){
 
@@ -2449,16 +2449,22 @@ body{
 
 
 
-/* ===== FIX catálogo móvil ===== */
-@media (max-width:768px){
+/* ==== FIX catálogo móvil ==== */
+@media (max-width: 768px) {
 
-  .products-section > .container{
-    display:block !important;
-    grid-template-columns:none !important;
+  .products-section > .container {
+    display: block !important;
+    grid-template-columns: none !important;
   }
 
-} 
+  .site-footer .footer-grid > div:last-child {
+    display: grid;
+    align-content: start;
+    gap: 7px;
+  }
 
+  .site-footer .footer-grid > div:last-child h3 {
+    margin-bottom: 5px;
+  }
 
-.site-footer .footer-grid > div:last-child { display: grid; align-content: start; gap: 7px; }
-.site-footer .footer-grid > div:last-child h3 { margin-bottom: 5px; }
+}
