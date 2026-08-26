@@ -205,7 +205,7 @@ const elements = {
   // Favoritos
   favoritesButton: document.querySelector("#favoritesButton"),
   favoritesCount: document.querySelector("#favoritesCount"),
-  sendFavorites: document.querySelector("#sendFavorites")
+  sendFavorites: document.querySelector("#drawerWhatsApp")
 };
 
 let currentGallery = [];
