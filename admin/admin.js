@@ -980,18 +980,74 @@ window.eliminarProducto = async function (index) {
 // BOTÓN PUBLICAR
 // =========================================
 
-document
-    .getElementById("publicarGitHub")
-    .addEventListener("click", function () {
-        alert(
-            "El catálogo está guardado en tu PC.\n\n" +
-            "Para publicarlo en GitHub ejecuta:\n\n" +
-            "git add .\n" +
-            "git commit -m \"Actualizar catálogo\"\n" +
-            "git push origin main"
-        );
-    });
+// =========================================
+// PUBLICAR CATÁLOGO
+// =========================================
 
+const botonPublicar =
+    document.getElementById("publicarGitHub");
+
+botonPublicar.addEventListener(
+    "click",
+    async function () {
+
+        const confirmar = confirm(
+            "¿Quieres publicar ahora el catálogo LYBOX en GitHub?"
+        );
+
+        if (!confirmar) {
+            return;
+        }
+
+        const textoOriginal =
+            botonPublicar.textContent;
+
+        botonPublicar.disabled = true;
+        botonPublicar.textContent =
+            "⏳ Publicando...";
+
+        try {
+
+            const response =
+                await fetch("/api/publish", {
+                    method: "POST"
+                });
+
+            const result =
+                await response.json();
+
+            if (!response.ok || !result.ok) {
+
+                throw new Error(
+                    result.error ||
+                    "No se pudo publicar el catálogo."
+                );
+            }
+
+            alert(
+                "🎉 ¡Catálogo publicado correctamente!\n\n" +
+                "Los cambios ya fueron enviados a GitHub.\n\n" +
+                "GitHub Pages actualizará la página automáticamente."
+            );
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "❌ Error al publicar el catálogo:\n\n" +
+                error.message
+            );
+
+        } finally {
+
+            botonPublicar.disabled = false;
+
+            botonPublicar.textContent =
+                textoOriginal;
+        }
+    }
+);
 // =========================================
 // INICIAR
 // =========================================
