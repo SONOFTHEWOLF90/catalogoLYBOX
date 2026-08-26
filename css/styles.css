@@ -986,9 +986,10 @@ justify-content:center;
 .modal-grid {
   display: grid;
   grid-template-columns: 1.1fr .9fr;
-  height: 90vh;
-  max-height: 650px;
+  height: calc(100vh - 30px);
+  max-height: none;
   min-height: 0;
+  overflow: hidden;
 }
 
 .gallery-column {
@@ -997,6 +998,9 @@ justify-content:center;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .info-column {
