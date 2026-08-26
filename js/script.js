@@ -600,10 +600,10 @@ function sendFavoritesWhatsApp() {
     message += `• ${p.name} (${p.sku})\n`;
   });
 
-  window.open(
-    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
-    "_blank"
-  );
+  const whatsappUrl =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  window.location.href = whatsappUrl;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
