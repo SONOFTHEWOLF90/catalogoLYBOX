@@ -96,14 +96,16 @@
     "name": "Polo Combate Amateur",
     "brand": "LYBOX",
     "category": "polos",
-    "price": 55,
+    "price": 38,
     "currency": "PEN",
     "stock": "available",
-    "image": "images/products/polo-combate-amateur-2.webp",
+    "image": "images/products/polo-combate-amateur-4.webp",
     "images": [
+      "images/products/polo-combate-amateur-4.webp",
+      "images/products/polo-combate-amateur.webp",
       "images/products/polo-combate-amateur-2.webp",
       "images/products/polo-combate-amateur-3.webp",
-      "images/products/polo-combate-amateur.webp"
+      "images/products/polo-combate-amateur-5.webp"
     ],
     "description": "Polo deportivo de Combate Amateur diseñado para quienes practican boxeo y deportes de combate. Su diseño deportivo ofrece comodidad y libertad de movimiento, siendo ideal para entrenamientos, actividades deportivas y uso casual.",
     "features": [
