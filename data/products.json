@@ -1,23 +1,30 @@
 [
   {
     "id": 5,
-    "sku": "POLO-LYBOX-001",
-    "name": "POLO SPARRING",
+    "sku": "LY-PTJ-001",
+    "name": "Polo The Power of the Jab",
     "brand": "LYBOX",
     "category": "polos",
-    "price": 50,
+    "price": 60,
     "currency": "PEN",
     "stock": "available",
-    "image": "images/products/polo lybox sparring.jpeg",
-    "description": "Producto DEMO para probar la categoría de protectores.",
+    "image": "images/products/polos-3.webp",
+    "images": [
+      "images/products/polos-3.webp",
+      "images/products/polos.webp",
+      "images/products/polos-2.webp"
+    ],
+    "description": "Polo deportivo con diseño inspirado en el boxeo y la técnica del jab. Una prenda ideal para los amantes del deporte de combate, perfecta para actividades deportivas o para lucir tu pasión por el boxeo en el día a día.",
     "features": [
-      "Diseño DEMO",
-      "Algodon"
+      "Diseño inspirado en el boxeo",
+      "Estampado \"The Power of the Jab\"",
+      "Ideal para amantes del boxeo"
     ],
     "sizes": [
       "S",
       "M",
-      "L"
+      "L",
+      "XL"
     ],
     "colors": [
       "Negro"
