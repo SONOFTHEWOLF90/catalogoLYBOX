@@ -1005,9 +1005,11 @@ justify-content:center;
 
 .info-column {
   padding: 34px;
+  padding-bottom: 60px;
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  
 }
 
 /* Imagen principal */
@@ -1101,13 +1103,6 @@ justify-content:center;
   text-transform:uppercase;
 }
 
-.info-column h2{
-  margin:10px 0;
-  font-family:"Barlow Condensed",sans-serif;
-  font-size:3rem;
-  line-height:.95;
-  text-transform:uppercase;
-}
 
 .modal-price{
   margin:12px 0;
@@ -1177,9 +1172,6 @@ justify-content:center;
     padding:16px;
   }
 
-  .info-column{
-    padding:22px;
-  }
 
   .main-image{
     max-height:45vh;
@@ -2455,6 +2447,17 @@ body{
   }
 }
 
+/* ===== FIX BOTÓN WHATSAPP EN MODAL ===== */
+
+
+
+#modal-whatsapp {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 24px;
+  flex-shrink: 0;
+}
 
 
 /* ==== FIX catálogo móvil ==== */
