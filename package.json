@@ -4,6 +4,24 @@
   "type": "module",
   "dependencies": {
     "@octokit/auth-app": "^7.1.0",
-    "@octokit/core": "^6.1.4"
-  }
+    "@octokit/core": "^6.1.4",
+    "express": "^5.2.1"
+  },
+  "version": "1.0.0",
+  "description": "Sitio estático en HTML5 + CSS3 + JavaScript vanilla.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SONOFTHEWOLF90/catalogoLYBOX.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SONOFTHEWOLF90/catalogoLYBOX/issues"
+  },
+  "homepage": "https://github.com/SONOFTHEWOLF90/catalogoLYBOX#readme"
 }

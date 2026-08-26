@@ -15,9 +15,8 @@
       "Cierre de velcro",
       "Acolchado de alta densidad"
     ],
-    "sizes": [ 
+    "sizes": [
       "14 oz"
-      
     ],
     "colors": [
       "Negro"
@@ -38,14 +37,12 @@
       "Diseño para entrenamiento",
       "Muñequera ajustable",
       "Acolchado DEMO"
-      
     ],
     "sizes": [
       "10 oz",
       "12 oz",
       "14 oz",
       "16 oz"
-      
     ],
     "colors": [
       "Naranja"
@@ -72,7 +69,6 @@
     ],
     "colors": [
       "Negro"
-      
     ]
   },
   {
@@ -143,6 +139,40 @@
     ],
     "colors": [
       "Blanco"
+    ]
+  },
+  {
+    "id": 7,
+    "sku": "LY-SH-001",
+    "name": "Short de Boxeo",
+    "brand": "LYBOX",
+    "category": "shorts",
+    "price": 120,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/short-de-boxeo-5.webp",
+    "images": [
+      "images/products/short-de-boxeo-5.webp",
+      "images/products/short-de-boxeo-2.webp",
+      "images/products/short-de-boxeo-3.webp",
+      "images/products/short-de-boxeo-4.webp",
+      "images/products/short-de-boxeo.webp"
+    ],
+    "description": "Short deportivo diseñado para brindar comodidad y libertad de movimiento durante el entrenamiento y la práctica de deportes de combate.",
+    "features": [
+      "Corte amplio",
+      "tejido ligero",
+      "cintura elástica",
+      "cómodo para entrenamiento y competición"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Negro"
     ]
   }
 ]
