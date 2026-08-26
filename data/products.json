@@ -11,7 +11,6 @@
     "image": "images/products/polo-the-power-of-the-jab.webp",
     "images": [
       "images/products/polo-the-power-of-the-jab.webp",
-      "images/products/polo-the-power-of-the-jab-3.webp",
       "images/products/polo-the-power-of-the-jab-2.webp"
     ],
     "description": "Polo deportivo con diseño inspirado en el boxeo y la técnica del jab. Una prenda ideal para los amantes del deporte de combate, perfecta para actividades deportivas o para lucir tu pasión por el boxeo en el día a día.",
@@ -145,7 +144,6 @@
     "image": "images/products/polo-sparring.webp",
     "images": [
       "images/products/polo-sparring.webp",
-      "images/products/polo-sparring-3.webp",
       "images/products/polo-sparring-2.webp"
     ],
     "description": "Polo negro de estilo deportivo inspirado en el entrenamiento de boxeo y el sparring. Presenta un diseño posterior con la palabra “SPARRING”. Una prenda ideal para quienes practican boxeo y deportes de combate, combinando un diseño deportivo con un estilo urbano para usar dentro o fuera del gimnasio.",
@@ -177,7 +175,6 @@
     "image": "images/products/polo-floyd-mayweather.webp",
     "images": [
       "images/products/polo-floyd-mayweather.webp",
-      "images/products/polo-floyd-mayweather-3.webp",
       "images/products/polo-floyd-mayweather-2.webp"
     ],
     "description": "Polo negro con diseño inspirado en Floyd Mayweather y su estilo característico dentro del boxeo. El estampado posterior presenta una ilustración del boxeador acompañada de la frase “HIT AND DON'T GET HIT”.\n\nUna prenda pensada para los aficionados al boxeo y a las figuras históricas del deporte, ideal para complementar un estilo deportivo y urbano.",
@@ -210,8 +207,7 @@
     "image": "images/products/polo-mike-tyson.webp",
     "images": [
       "images/products/polo-mike-tyson.webp",
-      "images/products/polo-mike-tyson-2.webp",
-      "images/products/polo-mike-tyson-3.webp"
+      "images/products/polo-mike-tyson-2.webp"
     ],
     "description": "Polo negro con diseño inspirado en Mike Tyson y su trayectoria en el boxeo. El estampado posterior presenta una ilustración del boxeador acompañada de la frase “EVERYBODY HAS A PLAN... UNTIL THEY GET HIT”.\n\nUna prenda ideal para los aficionados al boxeo que buscan un diseño llamativo relacionado con una de las figuras más reconocidas de este deporte.",
     "features": [
@@ -220,6 +216,72 @@
       "Estampado posterior",
       "Frase \"EVERYBODY HAS A PLAN... UNTIL THEY GET HIT\"",
       "Estilo deportivo y urbano"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": 13,
+    "sku": "LY-PTU-001",
+    "name": "Polo Topuria",
+    "brand": "LYBOX",
+    "category": "polos",
+    "price": 60,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/polo-topuria.webp",
+    "images": [
+      "images/products/polo-topuria.webp",
+      "images/products/polo-topuria-2.webp"
+    ],
+    "description": "Polo negro de estilo deportivo inspirado en el mundo de las MMA, con un diseño dedicado a Ilia Topuria. El estampado posterior presenta una ilustración del peleador junto al nombre “TOPURIA”, el apodo “MATADOR” y la frase “THE PAIN IS TEMPORARY, THE GLORY IS FOREVER”.",
+    "features": [
+      "Diseño inspirado en las MMA",
+      "Diseño dedicado a Ilia Topuria",
+      "Estampado posterior",
+      "Texto \"TOPURIA\"",
+      "Texto \"MATADOR\"",
+      "Frase \"THE PAIN IS TEMPORARY, THE GLORY IS FOREVER\""
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": 14,
+    "sku": "LY-PMC-001",
+    "name": "Polo McGregor",
+    "brand": "LYBOX",
+    "category": "polos",
+    "price": 60,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/polo-mcgregor.webp",
+    "images": [
+      "images/products/polo-mcgregor.webp",
+      "images/products/polo-mcgregor-2.webp"
+    ],
+    "description": "Polo negro de estilo deportivo inspirado en las MMA y en Conor McGregor. El estampado posterior presenta una ilustración del peleador acompañada de su nombre y la frase “I'M NOT TALENTED, I'M OBSESSED”.",
+    "features": [
+      "Diseño inspirado en las MMA",
+      "Diseño dedicado a Conor McGregor",
+      "Estampado posterior",
+      "Ilustración de peleador",
+      "Texto \"MCGREGOR\"",
+      "Frase \"I'M NOT TALENTED, I'M OBSESSED\""
     ],
     "sizes": [
       "S",
