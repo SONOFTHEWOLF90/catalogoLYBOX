@@ -102,7 +102,7 @@
     "name": "Polo Combate Amateur",
     "brand": "LYBOX",
     "category": "polos",
-    "price": 38,
+    "price": 49,
     "currency": "PEN",
     "stock": "available",
     "image": "images/products/polo-combate-amateur-4.webp",
@@ -291,6 +291,35 @@
     ],
     "colors": [
       "Negro"
+    ]
+  },
+  {
+    "id": 15,
+    "sku": "LY-VEN-001",
+    "name": "Vendas Lybox  - MMA // BOXING",
+    "brand": "LYBOX",
+    "category": "vendas",
+    "price": 36.9,
+    "currency": "PEN",
+    "stock": "available",
+    "image": "images/products/vendas-lybox-mma-boxing.webp",
+    "images": [
+      "images/products/vendas-lybox-mma-boxing.webp",
+      "images/products/vendas-lybox-mma-boxing-2.webp"
+    ],
+    "description": "Protege tus manos y muñecas durante cada entrenamiento. Cómodas, resistentes y fáciles de colocar, ideales para boxeo, MMA y otros deportes de combate.",
+    "features": [
+      "Protección para manos y muñecas",
+      "Material resistente y cómodo",
+      "Ajuste seguro y firme",
+      "Fáciles de colocar"
+    ],
+    "sizes": [
+      "5 Metros"
+    ],
+    "colors": [
+      "Negro",
+      "Blanco"
     ]
   }
 ]
